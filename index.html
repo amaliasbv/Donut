@@ -3,36 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donut - Website-ul meu</title>
+    <title>DrawHub - Învață să desenezi!</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🍩 Bun venit la Donut!</h1>
-            <p class="subtitle">Primul meu website pe GitHub și Render</p>
+            <h1>🎨 DrawHub - Învață să desenezi!</h1>
+            <p class="subtitle">Aplicație interactivă de desen creată de Amalia</p>
         </header>
 
         <main>
             <section class="about">
-                <h2>Despre</h2>
-                <p>Acesta este primul meu proiect web, creat de Amalia și hostat gratuit pe Render!</p>
+                <h2>Bun venit!</h2>
+                <p>Această aplicație te va ajuta să înveți bazele desenului pas cu pas. Alege o lecție sau desenează liber!</p>
             </section>
 
-            <section class="features">
-                <h2>Ce am învățat:</h2>
-                <ul>
-                    <li>Cum să creez un repository pe GitHub</li>
-                    <li>Cum să folosesc Git pentru versionare</li>
-                    <li>Cum să deploy-ez un website gratuit pe Render</li>
-                    <li>Bazele HTML, CSS și JavaScript</li>
-                </ul>
-            </section>
+            <section class="drawing-section">
+                <div class="tools">
+                    <h3>Unelte de desen:</h3>
+                    <div class="tool-group">
+                        <label>Culoare:</label>
+                        <div class="color-palette">
+                            <button class="color-btn" data-color="#000000" style="background: #000000;" title="Negru"></button>
+                            <button class="color-btn" data-color="#ff0000" style="background: #ff0000;" title="Roșu"></button>
+                            <button class="color-btn" data-color="#00ff00" style="background: #00ff00;" title="Verde"></button>
+                            <button class="color-btn" data-color="#0000ff" style="background: #0000ff;" title="Albastru"></button>
+                            <button class="color-btn" data-color="#ffff00" style="background: #ffff00;" title="Galben"></button>
+                            <button class="color-btn" data-color="#ff00ff" style="background: #ff00ff;" title="Magenta"></button>
+                            <button class="color-btn" data-color="#00ffff" style="background: #00ffff;" title="Cyan"></button>
+                            <button class="color-btn" data-color="#ffa500" style="background: #ffa500;" title="Portocaliu"></button>
+                        </div>
+                    </div>
 
-            <section class="interactive">
-                <h2>Apasă butonul!</h2>
-                <button id="donutBtn" class="donut-button">Fă clic pentru un donut! 🍩</button>
-                <p id="message" class="message"></p>
+                    <div class="tool-group">
+                        <label>Grosime pensulă:</label>
+                        <input type="range" id="brushSize" min="1" max="20" value="3">
+                        <span id="brushSizeValue">3px</span>
+                    </div>
+
+                    <div class="tool-group">
+                        <button id="eraserBtn" class="tool-btn">🧹 Gumă</button>
+                        <button id="clearBtn" class="tool-btn">🗑️ Șterge tot</button>
+                        <button id="saveBtn" class="tool-btn">💾 Salvează</button>
+                    </div>
+                </div>
+
+                <div class="canvas-container">
+                    <canvas id="drawingCanvas"></canvas>
+                    <p class="canvas-hint">Desenează cu mouse-ul sau cu degetul pe mobil!</p>
+                </div>
+
+                <div class="tutorials">
+                    <h3>Lecții de desen:</h3>
+                    <div class="tutorial-buttons">
+                        <button class="tutorial-btn" data-tutorial="circle">Cum să desenezi un cerc</button>
+                        <button class="tutorial-btn" data-tutorial="house">Cum să desenezi o casă</button>
+                        <button class="tutorial-btn" data-tutorial="flower">Cum să desenezi o floare</button>
+                        <button class="tutorial-btn" data-tutorial="face">Cum să desenezi o față</button>
+                    </div>
+                    <div id="tutorialContent" class="tutorial-content"></div>
+                </div>
             </section>
         </main>
 
