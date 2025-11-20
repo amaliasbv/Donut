@@ -1,0 +1,174 @@
+// Home Page
+import State from '../utils/state.js';
+
+export default class HomePage {
+    constructor() {
+        this.state = State.getInstance();
+    }
+
+    async render() {
+        const user = this.state.get('user');
+        const progress = this.state.get('progress');
+
+        return `
+            <div class="page-container">
+                <header class="text-center mb-4">
+                    <h1 style="color: var(--primary); font-size: 2.5rem;">🎨 Bun venit la DrawHub, ${user.name}!</h1>
+                    <p style="font-size: 1.2rem; color: var(--text-gray);">
+                        Platformă de învățare artistică alimentată de AI
+                    </p>
+                </header>
+
+                <!-- Stats Overview -->
+                <div class="grid grid-4 mb-4">
+                    <div class="card text-center">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
+                        <h3 style="font-size: 2rem; color: var(--primary);">${progress.lessonsCompleted}/${progress.totalLessons}</h3>
+                        <p style="color: var(--text-gray);">Lecții Complete</p>
+                    </div>
+
+                    <div class="card text-center">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
+                        <h3 style="font-size: 2rem; color: var(--secondary-dark);">${progress.assignmentsCompleted}/${progress.totalAssignments}</h3>
+                        <p style="color: var(--text-gray);">Teme Completate</p>
+                    </div>
+
+                    <div class="card text-center">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
+                        <h3 style="font-size: 2rem; color: var(--warning);">Nivel ${user.level}</h3>
+                        <p style="color: var(--text-gray);">${user.xp} XP</p>
+                    </div>
+
+                    <div class="card text-center">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
+                        <h3 style="font-size: 2rem; color: var(--success);">2/3</h3>
+                        <p style="color: var(--text-gray);">Badge-uri</p>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="mb-4">
+                    <h2 class="mb-3" style="color: var(--primary-dark);">🚀 Acțiuni Rapide</h2>
+                    <div class="grid grid-3">
+                        <div class="card" data-action="lessons">
+                            <div class="card-header">
+                                <span style="font-size: 2rem;">📖</span>
+                                <h3 class="card-title">Continuă Lecțiile</h3>
+                            </div>
+                            <p style="color: var(--text-gray);">Învață teoria culorilor, perspective, și anatomie</p>
+                            <button class="btn btn-primary mt-2" style="width: 100%;">Vezi Lecții</button>
+                        </div>
+
+                        <div class="card" data-action="assignments">
+                            <div class="card-header">
+                                <span style="font-size: 2rem;">✏️</span>
+                                <h3 class="card-title">Primește o Temă</h3>
+                            </div>
+                            <p style="color: var(--text-gray);">Teme personalizate generate de AI pentru nivelul tău</p>
+                            <button class="btn btn-primary mt-2" style="width: 100%;">Vezi Teme</button>
+                        </div>
+
+                        <div class="card" data-action="upload">
+                            <div class="card-header">
+                                <span style="font-size: 2rem;">📸</span>
+                                <h3 class="card-title">Încarcă Desen</h3>
+                            </div>
+                            <p style="color: var(--text-gray);">Primește feedback instant de la AI</p>
+                            <button class="btn btn-primary mt-2" style="width: 100%;">Upload</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Progress -->
+                <div class="mb-4">
+                    <h2 class="mb-3" style="color: var(--primary-dark);">📊 Progresul Tău</h2>
+                    <div class="card">
+                        ${this.renderSkillBars(progress.skills)}
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div>
+                    <h2 class="mb-3" style="color: var(--primary-dark);">⏱️ Activitate Recentă</h2>
+                    <div class="card">
+                        <div class="activity-item" style="padding: 1rem; border-bottom: 1px solid var(--border);">
+                            <div class="flex-between">
+                                <div>
+                                    <strong>Lecția "Teoria Culorilor" completată</strong>
+                                    <p style="color: var(--text-gray); font-size: 0.875rem;">Acum 2 ore</p>
+                                </div>
+                                <span style="color: var(--success); font-size: 1.5rem;">✓</span>
+                            </div>
+                        </div>
+                        <div class="activity-item" style="padding: 1rem; border-bottom: 1px solid var(--border);">
+                            <div class="flex-between">
+                                <div>
+                                    <strong>Ai primit feedback pentru "Portret simplu"</strong>
+                                    <p style="color: var(--text-gray); font-size: 0.875rem;">Ieri</p>
+                                </div>
+                                <span style="color: var(--primary); font-size: 1.5rem;">🎨</span>
+                            </div>
+                        </div>
+                        <div class="activity-item" style="padding: 1rem;">
+                            <div class="flex-between">
+                                <div>
+                                    <strong>Badge "Maestru Culori" câștigat!</strong>
+                                    <p style="color: var(--text-gray); font-size: 0.875rem;">Acum 3 zile</p>
+                                </div>
+                                <span style="font-size: 1.5rem;">🏆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    renderSkillBars(skills) {
+        return Object.entries(skills).map(([skill, value]) => `
+            <div class="skill-bar mb-3">
+                <div class="flex-between mb-1">
+                    <span style="font-weight: 600; text-transform: capitalize;">${this.translateSkill(skill)}</span>
+                    <span style="color: var(--primary); font-weight: 600;">${value}%</span>
+                </div>
+                <div style="background: var(--bg-light); height: 10px; border-radius: 10px; overflow: hidden;">
+                    <div style="
+                        background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+                        width: ${value}%;
+                        height: 100%;
+                        transition: width 0.5s ease;
+                    "></div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    translateSkill(skill) {
+        const translations = {
+            color: 'Culoare',
+            shading: 'Umbre',
+            perspective: 'Perspectivă',
+            composition: 'Compoziție',
+            anatomy: 'Anatomie'
+        };
+        return translations[skill] || skill;
+    }
+
+    mount() {
+        // Handle quick action clicks
+        document.querySelectorAll('[data-action]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const action = e.currentTarget.getAttribute('data-action');
+                window.location.hash = action;
+
+                // Trigger navigation
+                const navLink = document.querySelector(`.nav-link[data-page="${action}"]`);
+                if (navLink) navLink.click();
+            });
+        });
+    }
+
+    cleanup() {
+        // Cleanup if needed
+    }
+}

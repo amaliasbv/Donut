@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawHub - Învață să desenezi!</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>🎨 DrawHub</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active" data-page="home">Acasă</a></li>
+                <li><a href="#lessons" class="nav-link" data-page="lessons">Lecții</a></li>
+                <li><a href="#assignments" class="nav-link" data-page="assignments">Teme</a></li>
+                <li><a href="#upload" class="nav-link" data-page="upload">Upload</a></li>
+                <li><a href="#profile" class="nav-link" data-page="profile">Profil</a></li>
+            </ul>
+            <div class="nav-auth">
+                <button class="btn-secondary" id="loginBtn">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main App Container -->
+    <main id="app">
+        <!-- Content will be loaded here dynamically -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>Creat cu ❤️ de Amalia | © 2025</p>
+            <div class="footer-links">
+                <a href="#about">Despre</a>
+                <a href="#contact">Contact</a>
+                <a href="#privacy">Confidențialitate</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="spinner-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+
+    <!-- Main App Script (type="module" for ES6 modules) -->
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>

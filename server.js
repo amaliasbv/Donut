@@ -4,14 +4,16 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Servește fișierele statice din directorul curent
+// Servește fișierele statice din /src și root
+app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.static(path.join(__dirname)));
 
-// Redirecționează toate rutele către index.html
+// SPA - Toate rutele returnează index.html din /src
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'src', 'index.html'));
 });
 
 app.listen(PORT, () => {
-    console.log(`Server-ul rulează pe portul ${PORT}`);
+    console.log(`🎨 DrawHub server running on port ${PORT}`);
+    console.log(`📍 Local: http://localhost:${PORT}`);
 });
