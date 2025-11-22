@@ -224,6 +224,16 @@ export default class LessonsPage {
         const lesson = this.lessons.find(l => l.id === lessonId);
         if (!lesson) return;
 
+        // If it's the Color Theory lesson, navigate directly to it
+        if (lessonId === 1) {
+            window.location.hash = 'lesson-color-theory';
+            const router = window.appRouter; // We'll set this in app.js
+            if (router) {
+                router.navigate('lesson-color-theory');
+            }
+            return;
+        }
+
         const modalHTML = `
             <div class="modal-overlay">
                 <div class="modal" style="max-width: 800px;">

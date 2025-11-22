@@ -8,11 +8,16 @@ import LessonsPage from './pages/lessons.js';
 import AssignmentsPage from './pages/assignments.js';
 import UploadPage from './pages/upload.js';
 import ProfilePage from './pages/profile.js';
+import ColorTheoryLesson from './pages/lesson-color-theory.js';
 
 class App {
     constructor() {
         this.router = new Router();
         this.state = State.getInstance();
+
+        // Make router globally accessible
+        window.appRouter = this.router;
+
         this.init();
     }
 
@@ -76,6 +81,7 @@ class App {
         this.router.addRoute('assignments', new AssignmentsPage());
         this.router.addRoute('upload', new UploadPage());
         this.router.addRoute('profile', new ProfilePage());
+        this.router.addRoute('lesson-color-theory', new ColorTheoryLesson());
     }
 
     setupNavigation() {
