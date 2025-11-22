@@ -281,15 +281,15 @@ export default class ColorTheoryLesson {
                     Când amesteci <strong>două culori primare</strong>, obții o culoare secundară!
                 </p>
 
-                <div class="color-mixing-demo" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 3rem 0;">
+                <div class="color-mixing-demo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 3rem 0;">
                     <!-- Verde -->
                     <div style="text-align: center;">
-                        <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                            <div style="width: 60px; height: 60px; background: #FFFF00; border-radius: 50%;"></div>
-                            <span style="font-size: 2rem;">+</span>
-                            <div style="width: 60px; height: 60px; background: #0000FF; border-radius: 50%;"></div>
-                            <span style="font-size: 2rem;">=</span>
-                            <div style="width: 80px; height: 80px; background: #00FF00; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,255,0,0.4);"></div>
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 0.3rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                            <div style="width: 50px; height: 50px; background: #FFFF00; border-radius: 50%; flex-shrink: 0;"></div>
+                            <span style="font-size: 1.5rem;">+</span>
+                            <div style="width: 50px; height: 50px; background: #0000FF; border-radius: 50%; flex-shrink: 0;"></div>
+                            <span style="font-size: 1.5rem;">=</span>
+                            <div style="width: 70px; height: 70px; background: #00FF00; border-radius: 50%; box-shadow: 0 8px 20px rgba(0,255,0,0.4); flex-shrink: 0;"></div>
                         </div>
                         <h3 style="color: #00AA00;">Verde</h3>
                         <p style="color: var(--text-gray); font-size: 0.9rem;">Natură • Prospețime • Echilibru</p>
@@ -297,12 +297,12 @@ export default class ColorTheoryLesson {
 
                     <!-- Portocaliu -->
                     <div style="text-align: center;">
-                        <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                            <div style="width: 60px; height: 60px; background: #FF0000; border-radius: 50%;"></div>
-                            <span style="font-size: 2rem;">+</span>
-                            <div style="width: 60px; height: 60px; background: #FFFF00; border-radius: 50%;"></div>
-                            <span style="font-size: 2rem;">=</span>
-                            <div style="width: 80px; height: 80px; background: #FF8800; border-radius: 50%; box-shadow: 0 10px 30px rgba(255,136,0,0.4);"></div>
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 0.3rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                            <div style="width: 50px; height: 50px; background: #FF0000; border-radius: 50%; flex-shrink: 0;"></div>
+                            <span style="font-size: 1.5rem;">+</span>
+                            <div style="width: 50px; height: 50px; background: #FFFF00; border-radius: 50%; flex-shrink: 0;"></div>
+                            <span style="font-size: 1.5rem;">=</span>
+                            <div style="width: 70px; height: 70px; background: #FF8800; border-radius: 50%; box-shadow: 0 8px 20px rgba(255,136,0,0.4); flex-shrink: 0;"></div>
                         </div>
                         <h3 style="color: #FF8800;">Portocaliu</h3>
                         <p style="color: var(--text-gray); font-size: 0.9rem;">Entuziasm • Căldură • Creativitate</p>
@@ -310,12 +310,12 @@ export default class ColorTheoryLesson {
 
                     <!-- Violet -->
                     <div style="text-align: center;">
-                        <div style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                            <div style="width: 60px; height: 60px; background: #FF0000; border-radius: 50%;"></div>
-                            <span style="font-size: 2rem;">+</span>
-                            <div style="width: 60px; height: 60px; background: #0000FF; border-radius: 50%;"></div>
-                            <span style="font-size: 2rem;">=</span>
-                            <div style="width: 80px; height: 80px; background: #8800FF; border-radius: 50%; box-shadow: 0 10px 30px rgba(136,0,255,0.4);"></div>
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 0.3rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                            <div style="width: 50px; height: 50px; background: #FF0000; border-radius: 50%; flex-shrink: 0;"></div>
+                            <span style="font-size: 1.5rem;">+</span>
+                            <div style="width: 50px; height: 50px; background: #0000FF; border-radius: 50%; flex-shrink: 0;"></div>
+                            <span style="font-size: 1.5rem;">=</span>
+                            <div style="width: 70px; height: 70px; background: #8800FF; border-radius: 50%; box-shadow: 0 8px 20px rgba(136,0,255,0.4); flex-shrink: 0;"></div>
                         </div>
                         <h3 style="color: #8800FF;">Violet</h3>
                         <p style="color: var(--text-gray); font-size: 0.9rem;">Mister • Lux • Imaginație</p>
@@ -653,9 +653,19 @@ export default class ColorTheoryLesson {
 
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'ro-RO';
-        utterance.rate = 0.9;
+        utterance.rate = 0.85; // Slightly slower for better clarity
         utterance.pitch = 1.0;
-        utterance.volume = 0.7;
+        utterance.volume = 0.8;
+
+        // Try to find and use a Romanian voice if available
+        const voices = this.synth.getVoices();
+        const romanianVoice = voices.find(voice =>
+            voice.lang === 'ro-RO' || voice.lang.startsWith('ro')
+        );
+
+        if (romanianVoice) {
+            utterance.voice = romanianVoice;
+        }
 
         this.synth.speak(utterance);
     }
