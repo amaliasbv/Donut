@@ -13,9 +13,9 @@ export default class HomePage {
         return `
             <div class="page-container">
                 <header class="text-center mb-4">
-                    <h1 style="color: var(--primary); font-size: 2.5rem;">🎨 Bun venit la DrawHub, ${user.name}!</h1>
+                    <h1 style="color: var(--primary); font-size: 2.5rem;">🎨 Welcome to DrawHub, ${user.name}!</h1>
                     <p style="font-size: 1.2rem; color: var(--text-gray);">
-                        Platformă de învățare artistică alimentată de AI
+                        AI-Powered Art Learning Platform
                     </p>
                 </header>
 
@@ -24,56 +24,56 @@ export default class HomePage {
                     <div class="card text-center">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
                         <h3 style="font-size: 2rem; color: var(--primary);">${progress.lessonsCompleted}/${progress.totalLessons}</h3>
-                        <p style="color: var(--text-gray);">Lecții Complete</p>
+                        <p style="color: var(--text-gray);">Lessons Completed</p>
                     </div>
 
                     <div class="card text-center">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
                         <h3 style="font-size: 2rem; color: var(--secondary-dark);">${progress.assignmentsCompleted}/${progress.totalAssignments}</h3>
-                        <p style="color: var(--text-gray);">Teme Completate</p>
+                        <p style="color: var(--text-gray);">Assignments Completed</p>
                     </div>
 
                     <div class="card text-center">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
-                        <h3 style="font-size: 2rem; color: var(--warning);">Nivel ${user.level}</h3>
+                        <h3 style="font-size: 2rem; color: var(--warning);">Level ${user.level}</h3>
                         <p style="color: var(--text-gray);">${user.xp} XP</p>
                     </div>
 
                     <div class="card text-center">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
                         <h3 style="font-size: 2rem; color: var(--success);">2/3</h3>
-                        <p style="color: var(--text-gray);">Badge-uri</p>
+                        <p style="color: var(--text-gray);">Badges</p>
                     </div>
                 </div>
 
                 <!-- Quick Actions -->
                 <div class="mb-4">
-                    <h2 class="mb-3" style="color: var(--primary-dark);">🚀 Acțiuni Rapide</h2>
+                    <h2 class="mb-3" style="color: var(--primary-dark);">🚀 Quick Actions</h2>
                     <div class="grid grid-3">
                         <div class="card" data-action="lessons">
                             <div class="card-header">
                                 <span style="font-size: 2rem;">📖</span>
-                                <h3 class="card-title">Continuă Lecțiile</h3>
+                                <h3 class="card-title">Continue Lessons</h3>
                             </div>
-                            <p style="color: var(--text-gray);">Învață teoria culorilor, perspective, și anatomie</p>
-                            <button class="btn btn-primary mt-2" style="width: 100%;">Vezi Lecții</button>
+                            <p style="color: var(--text-gray);">Learn color theory, perspective, and anatomy</p>
+                            <button class="btn btn-primary mt-2" style="width: 100%;">View Lessons</button>
                         </div>
 
                         <div class="card" data-action="assignments">
                             <div class="card-header">
                                 <span style="font-size: 2rem;">✏️</span>
-                                <h3 class="card-title">Primește o Temă</h3>
+                                <h3 class="card-title">Get an Assignment</h3>
                             </div>
-                            <p style="color: var(--text-gray);">Teme personalizate generate de AI pentru nivelul tău</p>
-                            <button class="btn btn-primary mt-2" style="width: 100%;">Vezi Teme</button>
+                            <p style="color: var(--text-gray);">Personalized AI-generated assignments for your level</p>
+                            <button class="btn btn-primary mt-2" style="width: 100%;">View Assignments</button>
                         </div>
 
                         <div class="card" data-action="upload">
                             <div class="card-header">
                                 <span style="font-size: 2rem;">📸</span>
-                                <h3 class="card-title">Încarcă Desen</h3>
+                                <h3 class="card-title">Upload Drawing</h3>
                             </div>
-                            <p style="color: var(--text-gray);">Primește feedback instant de la AI</p>
+                            <p style="color: var(--text-gray);">Get instant AI feedback</p>
                             <button class="btn btn-primary mt-2" style="width: 100%;">Upload</button>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ export default class HomePage {
 
                 <!-- Skills Progress -->
                 <div class="mb-4">
-                    <h2 class="mb-3" style="color: var(--primary-dark);">📊 Progresul Tău</h2>
+                    <h2 class="mb-3" style="color: var(--primary-dark);">📊 Your Progress</h2>
                     <div class="card">
                         ${this.renderSkillBars(progress.skills)}
                     </div>
@@ -89,13 +89,13 @@ export default class HomePage {
 
                 <!-- Recent Activity -->
                 <div>
-                    <h2 class="mb-3" style="color: var(--primary-dark);">⏱️ Activitate Recentă</h2>
+                    <h2 class="mb-3" style="color: var(--primary-dark);">⏱️ Recent Activity</h2>
                     <div class="card">
                         <div class="activity-item" style="padding: 1rem; border-bottom: 1px solid var(--border);">
                             <div class="flex-between">
                                 <div>
-                                    <strong>Lecția "Teoria Culorilor" completată</strong>
-                                    <p style="color: var(--text-gray); font-size: 0.875rem;">Acum 2 ore</p>
+                                    <strong>Lesson "Color Theory" completed</strong>
+                                    <p style="color: var(--text-gray); font-size: 0.875rem;">2 hours ago</p>
                                 </div>
                                 <span style="color: var(--success); font-size: 1.5rem;">✓</span>
                             </div>
@@ -103,8 +103,8 @@ export default class HomePage {
                         <div class="activity-item" style="padding: 1rem; border-bottom: 1px solid var(--border);">
                             <div class="flex-between">
                                 <div>
-                                    <strong>Ai primit feedback pentru "Portret simplu"</strong>
-                                    <p style="color: var(--text-gray); font-size: 0.875rem;">Ieri</p>
+                                    <strong>You received feedback for "Simple Portrait"</strong>
+                                    <p style="color: var(--text-gray); font-size: 0.875rem;">Yesterday</p>
                                 </div>
                                 <span style="color: var(--primary); font-size: 1.5rem;">🎨</span>
                             </div>
@@ -112,8 +112,8 @@ export default class HomePage {
                         <div class="activity-item" style="padding: 1rem;">
                             <div class="flex-between">
                                 <div>
-                                    <strong>Badge "Maestru Culori" câștigat!</strong>
-                                    <p style="color: var(--text-gray); font-size: 0.875rem;">Acum 3 zile</p>
+                                    <strong>Badge "Color Master" earned!</strong>
+                                    <p style="color: var(--text-gray); font-size: 0.875rem;">3 days ago</p>
                                 </div>
                                 <span style="font-size: 1.5rem;">🏆</span>
                             </div>
@@ -145,11 +145,11 @@ export default class HomePage {
 
     translateSkill(skill) {
         const translations = {
-            color: 'Culoare',
-            shading: 'Umbre',
-            perspective: 'Perspectivă',
-            composition: 'Compoziție',
-            anatomy: 'Anatomie'
+            color: 'Color',
+            shading: 'Shading',
+            perspective: 'Perspective',
+            composition: 'Composition',
+            anatomy: 'Anatomy'
         };
         return translations[skill] || skill;
     }

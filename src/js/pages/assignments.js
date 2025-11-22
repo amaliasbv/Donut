@@ -11,33 +11,33 @@ export default class AssignmentsPage {
         return [
             {
                 id: 1,
-                title: 'Desen de Natură Statică',
-                description: 'Desenează 3-5 obiecte simple (fructe, cană, carte) cu lumină naturală',
+                title: 'Still Life Drawing',
+                description: 'Draw 3-5 simple objects (fruits, mug, book) with natural lighting',
                 difficulty: 'beginner',
                 estimatedTime: 60,
                 status: 'completed',
                 referenceImage: '🍎📚☕',
-                objectives: ['Proporții corecte', 'Umbre realiste', 'Compoziție echilibrată']
+                objectives: ['Correct proportions', 'Realistic shadows', 'Balanced composition']
             },
             {
                 id: 2,
-                title: 'Portret Simplu',
-                description: 'Desenează un portret folosind proporțiile învățate',
+                title: 'Simple Portrait',
+                description: 'Draw a portrait using the proportions you learned',
                 difficulty: 'intermediate',
                 estimatedTime: 90,
                 status: 'in_progress',
                 referenceImage: '👤',
-                objectives: ['Proporții faciale', 'Plasarea trăsăturilor', 'Shading subtil']
+                objectives: ['Facial proportions', 'Feature placement', 'Subtle shading']
             },
             {
                 id: 3,
-                title: 'Peisaj cu Perspectivă',
-                description: 'Creează un peisaj urban cu perspectivă în 2 puncte',
+                title: 'Landscape with Perspective',
+                description: 'Create an urban landscape with 2-point perspective',
                 difficulty: 'advanced',
                 estimatedTime: 120,
                 status: 'available',
                 referenceImage: '🏙️',
-                objectives: ['Perspectivă corectă', 'Detalii arhitecturale', 'Profunzime']
+                objectives: ['Correct perspective', 'Architectural details', 'Depth']
             }
         ];
     }
@@ -46,15 +46,15 @@ export default class AssignmentsPage {
         return `
             <div class="page-container">
                 <header class="mb-4">
-                    <h1 style="color: var(--primary); font-size: 2.5rem;">📝 Teme</h1>
+                    <h1 style="color: var(--primary); font-size: 2.5rem;">📝 Assignments</h1>
                     <p style="font-size: 1.1rem; color: var(--text-gray);">
-                        Teme personalizate pentru exersarea abilităților tale
+                        Personalized assignments to practice your skills
                     </p>
                 </header>
 
                 <div class="mb-4">
                     <button class="btn btn-primary" id="generateAssignmentBtn">
-                        ✨ Generează Temă Nouă (AI)
+                        ✨ Generate New Assignment (AI)
                     </button>
                 </div>
 
@@ -85,7 +85,7 @@ export default class AssignmentsPage {
                 </p>
 
                 <div style="margin-bottom: 1rem;">
-                    <strong style="color: var(--primary);">Obiective:</strong>
+                    <strong style="color: var(--primary);">Objectives:</strong>
                     <ul style="margin-top: 0.5rem; padding-left: 1.5rem; color: var(--text-gray);">
                         ${assignment.objectives.map(obj => `<li>${obj}</li>`).join('')}
                     </ul>
@@ -93,7 +93,7 @@ export default class AssignmentsPage {
 
                 <div class="flex-between" style="margin-bottom: 1rem; font-size: 0.875rem; color: var(--text-gray);">
                     <span>⏱️ ${assignment.estimatedTime} min</span>
-                    ${assignment.status === 'completed' ? '<span style="color: var(--success);">✓ Completat</span>' : ''}
+                    ${assignment.status === 'completed' ? '<span style="color: var(--success);">✓ Completed</span>' : ''}
                 </div>
 
                 <button class="btn ${assignment.status === 'completed' ? 'btn-secondary' : 'btn-primary'}" style="width: 100%;">
@@ -105,27 +105,27 @@ export default class AssignmentsPage {
 
     renderStatusBadge(status) {
         const badges = {
-            available: '<div style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; display: inline-block; margin-bottom: 1rem;">📌 Disponibil</div>',
-            in_progress: '<div style="background: var(--warning); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; display: inline-block; margin-bottom: 1rem;">⏳ În progres</div>',
-            completed: '<div style="background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; display: inline-block; margin-bottom: 1rem;">✓ Completat</div>'
+            available: '<div style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; display: inline-block; margin-bottom: 1rem;">📌 Available</div>',
+            in_progress: '<div style="background: var(--warning); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; display: inline-block; margin-bottom: 1rem;">⏳ In Progress</div>',
+            completed: '<div style="background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; display: inline-block; margin-bottom: 1rem;">✓ Completed</div>'
         };
         return badges[status] || '';
     }
 
     getButtonText(status) {
         const texts = {
-            available: '▶️ Începe Tema',
-            in_progress: '🔄 Continuă',
-            completed: '👁️ Vezi Feedback'
+            available: '▶️ Start Assignment',
+            in_progress: '🔄 Continue',
+            completed: '👁️ View Feedback'
         };
-        return texts[status] || 'Vezi Tema';
+        return texts[status] || 'View Assignment';
     }
 
     translateDifficulty(difficulty) {
         const translations = {
-            beginner: 'Începător',
-            intermediate: 'Intermediar',
-            advanced: 'Avansat'
+            beginner: 'Beginner',
+            intermediate: 'Intermediate',
+            advanced: 'Advanced'
         };
         return translations[difficulty] || difficulty;
     }
@@ -133,7 +133,7 @@ export default class AssignmentsPage {
     mount() {
         // Generate assignment button
         document.getElementById('generateAssignmentBtn')?.addEventListener('click', () => {
-            alert('Funcția de generare AI va fi implementată în backend!\nVa genera teme personalizate bazate pe nivelul și progresul tău.');
+            alert('AI generation feature will be implemented in the backend!\nIt will generate personalized assignments based on your level and progress.');
         });
 
         // Assignment cards
@@ -149,7 +149,7 @@ export default class AssignmentsPage {
         document.querySelectorAll('.assignment-card button').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                alert('Aceasta va duce la pagina de upload sau feedback!');
+                alert('This will take you to the upload or feedback page!');
                 window.location.hash = 'upload';
             });
         });
@@ -175,24 +175,24 @@ export default class AssignmentsPage {
                         <p style="font-size: 1.1rem; margin-bottom: 2rem;">${assignment.description}</p>
 
                         <div class="mb-3">
-                            <h3 style="color: var(--primary);">🎯 Obiective:</h3>
+                            <h3 style="color: var(--primary);">🎯 Objectives:</h3>
                             <ul style="padding-left: 1.5rem;">
                                 ${assignment.objectives.map(obj => `<li>${obj}</li>`).join('')}
                             </ul>
                         </div>
 
                         <div class="mb-3">
-                            <h3 style="color: var(--primary);">📸 Referință:</h3>
+                            <h3 style="color: var(--primary);">📸 Reference:</h3>
                             <div style="background: var(--bg-light); padding: 3rem; text-align: center; border-radius: var(--radius); font-size: 4rem;">
                                 ${assignment.referenceImage}
                             </div>
                             <p style="color: var(--text-gray); font-size: 0.875rem; margin-top: 0.5rem; text-align: center;">
-                                Imaginea de referință va fi generată de AI
+                                Reference image will be AI-generated
                             </p>
                         </div>
 
                         <button class="btn btn-primary" style="width: 100%;" onclick="window.location.hash='upload'">
-                            ${assignment.status === 'completed' ? '📤 Reîncarcă Desenul' : '📤 Încarcă Desenul Tău'}
+                            ${assignment.status === 'completed' ? '📤 Re-upload Drawing' : '📤 Upload Your Drawing'}
                         </button>
                     </div>
                 </div>

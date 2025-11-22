@@ -1,4 +1,4 @@
-// LECȚIA 1: Teoria Culorilor - Interactive Lesson
+// LESSON 1: Color Theory - Interactive Lesson
 import State from '../utils/state.js';
 
 export default class ColorTheoryLesson {
@@ -21,8 +21,8 @@ export default class ColorTheoryLesson {
 
                 <!-- Lesson Header -->
                 <div class="lesson-header">
-                    <button class="btn-back" id="backToLessons">← Înapoi</button>
-                    <h1>🎨 Lecția 1: Teoria Culorilor</h1>
+                    <button class="btn-back" id="backToLessons">← Back</button>
+                    <h1>🎨 Lesson 1: Color Theory</h1>
                     <div class="lesson-controls">
                         <button class="btn-icon" id="toggleNarration" title="Toggle narration">
                             🔊
@@ -38,10 +38,10 @@ export default class ColorTheoryLesson {
                 <!-- Navigation Buttons -->
                 <div class="lesson-navigation">
                     <button class="btn btn-secondary" id="prevModule" style="display: none;">
-                        ← Anterior
+                        ← Previous
                     </button>
                     <button class="btn btn-primary" id="nextModule">
-                        Următorul →
+                        Next →
                     </button>
                 </div>
             </div>
@@ -197,30 +197,30 @@ export default class ColorTheoryLesson {
     renderIntro() {
         return `
             <div class="module-intro">
-                <h2>🎨 Bun venit la Teoria Culorilor!</h2>
+                <h2>🎨 Welcome to Color Theory!</h2>
                 <p>
-                    Culorile sunt sufletul oricărui desen. Astăzi vei învăța cum să alegi și să combini
-                    culorile perfecte pentru creațiile tale artistice.
+                    Colors are the soul of any drawing. Today you will learn how to choose and combine
+                    the perfect colors for your artistic creations.
                 </p>
                 <p>
-                    La finalul acestei lecții, vei putea să:
+                    At the end of this lesson, you will be able to:
                 </p>
 
                 <div class="learning-objectives">
-                    <h3>📚 Ce vei învăța:</h3>
+                    <h3>📚 What You'll Learn:</h3>
                     <ul>
-                        <li>Să înțelegi cercul cromatic și cele 12 culori</li>
-                        <li>Să identifici culorile primare, secundare și terțiare</li>
-                        <li>Să creezi armonii de culori complementare și analoage</li>
-                        <li>Să aplici regula 60-30-10 pentru paleta perfectă</li>
-                        <li>Să folosești psihologia culorilor în desenele tale</li>
+                        <li>Understand the color wheel and the 12 colors</li>
+                        <li>Identify primary, secondary, and tertiary colors</li>
+                        <li>Create complementary and analogous color harmonies</li>
+                        <li>Apply the 60-30-10 rule for the perfect palette</li>
+                        <li>Use color psychology in your drawings</li>
                     </ul>
                 </div>
 
                 <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border-radius: var(--radius); font-size: 1.1rem;">
-                    ⏱️ Durata estimată: 30 minute<br>
-                    📖 5 module interactive<br>
-                    ✅ Mini-test la final
+                    ⏱️ Estimated Duration: 30 minutes<br>
+                    📖 5 Interactive Modules<br>
+                    ✅ Mini-Quiz at the End
                 </div>
             </div>
         `;
@@ -230,40 +230,40 @@ export default class ColorTheoryLesson {
         return `
             <div class="module-content">
                 <h2 style="color: var(--primary); text-align: center; margin-bottom: 2rem;">
-                    🔴🟡🔵 Culorile Primare
+                    🔴🟡🔵 Primary Colors
                 </h2>
 
                 <p style="font-size: 1.2rem; text-align: center; margin-bottom: 3rem;">
-                    Culorile primare sunt <strong>fundamentul</strong> tuturor celorlalte culori.
-                    Nu pot fi create prin amestecarea altor culori.
+                    Primary colors are the <strong>foundation</strong> of all other colors.
+                    They cannot be created by mixing other colors.
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 3rem 0;">
                     <div class="color-card" style="text-align: center;">
                         <div style="width: 150px; height: 150px; background: #FF0000; border-radius: 50%; margin: 0 auto 1rem; box-shadow: 0 10px 30px rgba(255,0,0,0.3);"></div>
-                        <h3 style="color: #FF0000;">Roșu</h3>
-                        <p style="color: var(--text-gray); font-size: 0.9rem;">Pasiune • Energie • Atenție</p>
+                        <h3 style="color: #FF0000;">Red</h3>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Passion • Energy • Attention</p>
                     </div>
 
                     <div class="color-card" style="text-align: center;">
                         <div style="width: 150px; height: 150px; background: #FFFF00; border-radius: 50%; margin: 0 auto 1rem; box-shadow: 0 10px 30px rgba(255,255,0,0.3);"></div>
-                        <h3 style="color: #DDB000;">Galben</h3>
-                        <p style="color: var(--text-gray); font-size: 0.9rem;">Veselie • Optimism • Lumină</p>
+                        <h3 style="color: #DDB000;">Yellow</h3>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Cheerfulness • Optimism • Light</p>
                     </div>
 
                     <div class="color-card" style="text-align: center;">
                         <div style="width: 150px; height: 150px; background: #0000FF; border-radius: 50%; margin: 0 auto 1rem; box-shadow: 0 10px 30px rgba(0,0,255,0.3);"></div>
-                        <h3 style="color: #0000FF;">Albastru</h3>
-                        <p style="color: var(--text-gray); font-size: 0.9rem;">Calm • Încredere • Pace</p>
+                        <h3 style="color: #0000FF;">Blue</h3>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Calm • Trust • Peace</p>
                     </div>
                 </div>
 
                 <div style="background: var(--bg-light); padding: 2rem; border-radius: var(--radius); margin-top: 3rem;">
-                    <h4 style="color: var(--primary); margin-bottom: 1rem;">💡 De reținut:</h4>
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">💡 Remember:</h4>
                     <p style="line-height: 1.8;">
-                        Culorile primare sunt <strong>roșu, galben și albastru</strong>.
-                        Gândește-te la ele ca la <strong>ingredientele de bază</strong> din care vei crea toate celelalte culori!
-                        În desenul tău, acestea sunt cele mai pure și intense culori pe care le poți folosi.
+                        The primary colors are <strong>red, yellow, and blue</strong>.
+                        Think of them as the <strong>basic ingredients</strong> from which you'll create all other colors!
+                        In your drawing, these are the purest and most intense colors you can use.
                     </p>
                 </div>
             </div>
@@ -274,15 +274,15 @@ export default class ColorTheoryLesson {
         return `
             <div class="module-content">
                 <h2 style="color: var(--primary); text-align: center; margin-bottom: 2rem;">
-                    🟢🟠🟣 Culorile Secundare
+                    🟢🟠🟣 Secondary Colors
                 </h2>
 
                 <p style="font-size: 1.2rem; text-align: center; margin-bottom: 3rem;">
-                    Când amesteci <strong>două culori primare</strong>, obții o culoare secundară!
+                    When you mix <strong>two primary colors</strong>, you get a secondary color!
                 </p>
 
                 <div class="color-mixing-demo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 3rem 0;">
-                    <!-- Verde -->
+                    <!-- Green -->
                     <div style="text-align: center;">
                         <div style="display: flex; justify-content: center; align-items: center; gap: 0.3rem; margin-bottom: 1rem; flex-wrap: wrap;">
                             <div style="width: 50px; height: 50px; background: #FFFF00; border-radius: 50%; flex-shrink: 0;"></div>
@@ -291,11 +291,11 @@ export default class ColorTheoryLesson {
                             <span style="font-size: 1.5rem;">=</span>
                             <div style="width: 70px; height: 70px; background: #00FF00; border-radius: 50%; box-shadow: 0 8px 20px rgba(0,255,0,0.4); flex-shrink: 0;"></div>
                         </div>
-                        <h3 style="color: #00AA00;">Verde</h3>
-                        <p style="color: var(--text-gray); font-size: 0.9rem;">Natură • Prospețime • Echilibru</p>
+                        <h3 style="color: #00AA00;">Green</h3>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Nature • Freshness • Balance</p>
                     </div>
 
-                    <!-- Portocaliu -->
+                    <!-- Orange -->
                     <div style="text-align: center;">
                         <div style="display: flex; justify-content: center; align-items: center; gap: 0.3rem; margin-bottom: 1rem; flex-wrap: wrap;">
                             <div style="width: 50px; height: 50px; background: #FF0000; border-radius: 50%; flex-shrink: 0;"></div>
@@ -304,11 +304,11 @@ export default class ColorTheoryLesson {
                             <span style="font-size: 1.5rem;">=</span>
                             <div style="width: 70px; height: 70px; background: #FF8800; border-radius: 50%; box-shadow: 0 8px 20px rgba(255,136,0,0.4); flex-shrink: 0;"></div>
                         </div>
-                        <h3 style="color: #FF8800;">Portocaliu</h3>
-                        <p style="color: var(--text-gray); font-size: 0.9rem;">Entuziasm • Căldură • Creativitate</p>
+                        <h3 style="color: #FF8800;">Orange</h3>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Enthusiasm • Warmth • Creativity</p>
                     </div>
 
-                    <!-- Violet -->
+                    <!-- Purple -->
                     <div style="text-align: center;">
                         <div style="display: flex; justify-content: center; align-items: center; gap: 0.3rem; margin-bottom: 1rem; flex-wrap: wrap;">
                             <div style="width: 50px; height: 50px; background: #FF0000; border-radius: 50%; flex-shrink: 0;"></div>
@@ -317,16 +317,16 @@ export default class ColorTheoryLesson {
                             <span style="font-size: 1.5rem;">=</span>
                             <div style="width: 70px; height: 70px; background: #8800FF; border-radius: 50%; box-shadow: 0 8px 20px rgba(136,0,255,0.4); flex-shrink: 0;"></div>
                         </div>
-                        <h3 style="color: #8800FF;">Violet</h3>
-                        <p style="color: var(--text-gray); font-size: 0.9rem;">Mister • Lux • Imaginație</p>
+                        <h3 style="color: #8800FF;">Purple</h3>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Mystery • Luxury • Imagination</p>
                     </div>
                 </div>
 
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: var(--radius); color: white; margin-top: 3rem;">
-                    <h4 style="margin-bottom: 1rem;">🎨 Încearcă tu!</h4>
+                    <h4 style="margin-bottom: 1rem;">🎨 Try It Yourself!</h4>
                     <p>
-                        În desenul tău, poți crea orice culoare secundară doar cu cele 3 culori primare.
-                        Nu ai nevoie de multe tuburi de vopsea - doar știință și practică!
+                        In your drawing, you can create any secondary color with just the 3 primary colors.
+                        You don't need many paint tubes - just science and practice!
                     </p>
                 </div>
             </div>
@@ -337,11 +337,11 @@ export default class ColorTheoryLesson {
         return `
             <div class="module-content">
                 <h2 style="color: var(--primary); text-align: center; margin-bottom: 2rem;">
-                    🎡 Cercul Cromatic Complet
+                    🎡 The Complete Color Wheel
                 </h2>
 
                 <p style="font-size: 1.2rem; text-align: center; margin-bottom: 3rem;">
-                    Cercul cromatic conține toate cele <strong>12 culori</strong>: 3 primare, 3 secundare și 6 terțiare.
+                    The color wheel contains all <strong>12 colors</strong>: 3 primary, 3 secondary, and 6 tertiary.
                 </p>
 
                 <!-- SVG Color Wheel -->
@@ -350,30 +350,30 @@ export default class ColorTheoryLesson {
                 </div>
 
                 <div style="background: var(--bg-light); padding: 2rem; border-radius: var(--radius);">
-                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">📍 Relații între Culori:</h3>
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">📍 Color Relationships:</h3>
 
                     <div style="display: grid; gap: 1.5rem;">
                         <div style="padding: 1rem; background: white; border-radius: var(--radius); border-left: 4px solid #FF0000;">
-                            <h4 style="color: var(--primary);">Complementare</h4>
-                            <p>Culori <strong>opuse pe cerc</strong>. Creează cel mai puternic contrast.</p>
+                            <h4 style="color: var(--primary);">Complementary</h4>
+                            <p>Colors <strong>opposite on the wheel</strong>. Creates the strongest contrast.</p>
                             <p style="font-size: 0.9rem; color: var(--text-gray);">
-                                Exemplu: Roșu-Verde, Albastru-Portocaliu, Galben-Violet
+                                Example: Red-Green, Blue-Orange, Yellow-Purple
                             </p>
                         </div>
 
                         <div style="padding: 1rem; background: white; border-radius: var(--radius); border-left: 4px solid #00FF00;">
-                            <h4 style="color: var(--primary);">Analoage</h4>
-                            <p>Culori <strong>alăturate pe cerc</strong>. Creează armonii naturale.</p>
+                            <h4 style="color: var(--primary);">Analogous</h4>
+                            <p>Colors <strong>adjacent on the wheel</strong>. Creates natural harmonies.</p>
                             <p style="font-size: 0.9rem; color: var(--text-gray);">
-                                Exemplu: Albastru, Albastru-Verde, Verde
+                                Example: Blue, Blue-Green, Green
                             </p>
                         </div>
 
                         <div style="padding: 1rem; background: white; border-radius: var(--radius); border-left: 4px solid #0000FF;">
-                            <h4 style="color: var(--primary);">Triadice</h4>
-                            <p><strong>3 culori echidistante</strong> pe cerc. Palete vibrante și echilibrate.</p>
+                            <h4 style="color: var(--primary);">Triadic</h4>
+                            <p><strong>3 evenly spaced colors</strong> on the wheel. Vibrant and balanced palettes.</p>
                             <p style="font-size: 0.9rem; color: var(--text-gray);">
-                                Exemplu: Roșu, Galben, Albastru (primiarele!)
+                                Example: Red, Yellow, Blue (the primaries!)
                             </p>
                         </div>
                     </div>
@@ -384,18 +384,18 @@ export default class ColorTheoryLesson {
 
     renderColorWheelSVG() {
         const colors = [
-            { name: 'Roșu', hex: '#FF0000', angle: 0 },
-            { name: 'Roșu-Portocaliu', hex: '#FF4400', angle: 30 },
-            { name: 'Portocaliu', hex: '#FF8800', angle: 60 },
-            { name: 'Galben-Portocaliu', hex: '#FFCC00', angle: 90 },
-            { name: 'Galben', hex: '#FFFF00', angle: 120 },
-            { name: 'Galben-Verde', hex: '#88FF00', angle: 150 },
-            { name: 'Verde', hex: '#00FF00', angle: 180 },
-            { name: 'Albastru-Verde', hex: '#00FF88', angle: 210 },
-            { name: 'Albastru', hex: '#0000FF', angle: 240 },
-            { name: 'Albastru-Violet', hex: '#4400FF', angle: 270 },
-            { name: 'Violet', hex: '#8800FF', angle: 300 },
-            { name: 'Roșu-Violet', hex: '#FF0088', angle: 330 }
+            { name: 'Red', hex: '#FF0000', angle: 0 },
+            { name: 'Red-Orange', hex: '#FF4400', angle: 30 },
+            { name: 'Orange', hex: '#FF8800', angle: 60 },
+            { name: 'Yellow-Orange', hex: '#FFCC00', angle: 90 },
+            { name: 'Yellow', hex: '#FFFF00', angle: 120 },
+            { name: 'Yellow-Green', hex: '#88FF00', angle: 150 },
+            { name: 'Green', hex: '#00FF00', angle: 180 },
+            { name: 'Blue-Green', hex: '#00FF88', angle: 210 },
+            { name: 'Blue', hex: '#0000FF', angle: 240 },
+            { name: 'Blue-Purple', hex: '#4400FF', angle: 270 },
+            { name: 'Purple', hex: '#8800FF', angle: 300 },
+            { name: 'Red-Purple', hex: '#FF0088', angle: 330 }
         ];
 
         let segments = '';
@@ -435,7 +435,7 @@ export default class ColorTheoryLesson {
                 ${segments}
                 <circle cx="250" cy="250" r="${innerRadius}" fill="white" stroke="var(--border)" stroke-width="2"/>
                 <text x="250" y="250" text-anchor="middle" dy=".3em" fill="var(--text-gray)" font-size="16">
-                    Cercul Cromatic
+                    Color Wheel
                 </text>
             </svg>
         `;
@@ -445,26 +445,26 @@ export default class ColorTheoryLesson {
         return `
             <div class="module-content">
                 <h2 style="color: var(--primary); text-align: center; margin-bottom: 2rem;">
-                    🎵 Armonii de Culori
+                    🎵 Color Harmonies
                 </h2>
 
                 <p style="font-size: 1.2rem; text-align: center; margin-bottom: 3rem;">
-                    Învață să combini culorile ca un maestru!
+                    Learn to combine colors like a master!
                 </p>
 
-                <!-- Regula 60-30-10 -->
+                <!-- The 60-30-10 Rule -->
                 <div style="background: white; padding: 2rem; border-radius: var(--radius); margin-bottom: 3rem; box-shadow: var(--shadow);">
-                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">📏 Regula 60-30-10</h3>
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">📏 The 60-30-10 Rule</h3>
                     <p style="margin-bottom: 2rem;">
-                        Formula secretă pentru paleta perfectă:
+                        The secret formula for the perfect palette:
                     </p>
 
                     <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
                         <div style="flex: 6; background: #667eea; height: 100px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            60% Culoare Dominantă
+                            60% Dominant Color
                         </div>
                         <div style="flex: 3; background: #f5576c; height: 100px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                            30% Secundară
+                            30% Secondary
                         </div>
                         <div style="flex: 1; background: #ffd700; height: 100px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
                             10% Accent
@@ -472,54 +472,54 @@ export default class ColorTheoryLesson {
                     </div>
 
                     <p style="color: var(--text-gray);">
-                        Această regulă creează echilibru perfect și face desenul tău să arate profesional!
+                        This rule creates perfect balance and makes your drawing look professional!
                     </p>
                 </div>
 
-                <!-- Temperatura Culorilor -->
+                <!-- Color Temperature -->
                 <div style="background: var(--bg-light); padding: 2rem; border-radius: var(--radius); margin-bottom: 3rem;">
-                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">🌡️ Temperatura Culorilor</h3>
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">🌡️ Color Temperature</h3>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                         <div>
-                            <h4 style="color: #FF4400; margin-bottom: 1rem;">🔥 Culori Calde</h4>
+                            <h4 style="color: #FF4400; margin-bottom: 1rem;">🔥 Warm Colors</h4>
                             <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
                                 <div style="width: 50px; height: 50px; background: #FF0000; border-radius: 50%;"></div>
                                 <div style="width: 50px; height: 50px; background: #FF8800; border-radius: 50%;"></div>
                                 <div style="width: 50px; height: 50px; background: #FFFF00; border-radius: 50%;"></div>
                             </div>
                             <p style="color: var(--text-gray); font-size: 0.9rem;">
-                                Evocă energie, pasiune, căldură. Perfect pentru desene pline de viață!
+                                Evoke energy, passion, warmth. Perfect for vibrant drawings!
                             </p>
                         </div>
 
                         <div>
-                            <h4 style="color: #0066FF; margin-bottom: 1rem;">❄️ Culori Reci</h4>
+                            <h4 style="color: #0066FF; margin-bottom: 1rem;">❄️ Cool Colors</h4>
                             <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
                                 <div style="width: 50px; height: 50px; background: #0000FF; border-radius: 50%;"></div>
                                 <div style="width: 50px; height: 50px; background: #00FF88; border-radius: 50%;"></div>
                                 <div style="width: 50px; height: 50px; background: #8800FF; border-radius: 50%;"></div>
                             </div>
                             <p style="color: var(--text-gray); font-size: 0.9rem;">
-                                Aduc calm, pace, seninătate. Ideale pentru peisaje liniștite!
+                                Bring calm, peace, serenity. Ideal for peaceful landscapes!
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Psihologia Culorilor -->
+                <!-- Color Psychology -->
                 <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 2rem; border-radius: var(--radius); color: white;">
-                    <h3 style="margin-bottom: 1.5rem;">🧠 Psihologia Culorilor</h3>
+                    <h3 style="margin-bottom: 1.5rem;">🧠 Color Psychology</h3>
                     <p style="margin-bottom: 1.5rem;">
-                        Fiecare culoare transmite emoții! Alege-le conștient:
+                        Each color conveys emotions! Choose them consciously:
                     </p>
                     <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 0.75rem;">🔴 Roșu: Pasiune, energie, pericol</li>
-                        <li style="margin-bottom: 0.75rem;">🔵 Albastru: Calm, încredere, profesionalism</li>
-                        <li style="margin-bottom: 0.75rem;">🟡 Galben: Veselie, optimism, atenție</li>
-                        <li style="margin-bottom: 0.75rem;">🟢 Verde: Natură, creștere, echilibru</li>
-                        <li style="margin-bottom: 0.75rem;">🟣 Violet: Mister, lux, creativitate</li>
-                        <li>🟠 Portocaliu: Entuziasm, prietenie, căldură</li>
+                        <li style="margin-bottom: 0.75rem;">🔴 Red: Passion, energy, danger</li>
+                        <li style="margin-bottom: 0.75rem;">🔵 Blue: Calm, trust, professionalism</li>
+                        <li style="margin-bottom: 0.75rem;">🟡 Yellow: Cheerfulness, optimism, attention</li>
+                        <li style="margin-bottom: 0.75rem;">🟢 Green: Nature, growth, balance</li>
+                        <li style="margin-bottom: 0.75rem;">🟣 Purple: Mystery, luxury, creativity</li>
+                        <li>🟠 Orange: Enthusiasm, friendship, warmth</li>
                     </ul>
                 </div>
             </div>
@@ -530,11 +530,11 @@ export default class ColorTheoryLesson {
         return `
             <div class="module-content">
                 <h2 style="color: var(--primary); text-align: center; margin-bottom: 2rem;">
-                    ✅ Mini-Test: Teoria Culorilor
+                    ✅ Mini-Quiz: Color Theory
                 </h2>
 
                 <p style="text-align: center; font-size: 1.1rem; margin-bottom: 3rem;">
-                    Testează-ți cunoștințele! 5 întrebări rapide.
+                    Test your knowledge! 5 quick questions.
                 </p>
 
                 <div id="quizContainer">
@@ -546,7 +546,7 @@ export default class ColorTheoryLesson {
                     <h3 id="resultTitle" style="color: var(--primary); margin-bottom: 1rem;"></h3>
                     <p id="resultMessage" style="font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem;"></p>
                     <button class="btn btn-primary" onclick="window.location.hash='lessons';">
-                        🎉 Înapoi la Lecții
+                        🎉 Back to Lessons
                     </button>
                 </div>
             </div>
@@ -574,7 +574,7 @@ export default class ColorTheoryLesson {
         });
 
         // Start narration for intro
-        this.narrate("Bun venit la prima ta lecție de artă! Astăzi vom învăța despre teoria culorilor - fundamentul oricărui desen frumos. La finalul acestei lecții, vei putea să alegi culorile perfecte pentru desenele tale. Apasă pe 'Următorul' când ești gata să începi!");
+        this.narrate("Welcome to your first art lesson! Today we'll learn about color theory - the foundation of any beautiful drawing. By the end of this lesson, you'll be able to choose the perfect colors for your drawings. Press 'Next' when you're ready to begin!");
 
         // Update progress
         this.updateProgress();
@@ -604,28 +604,28 @@ export default class ColorTheoryLesson {
         switch(this.currentModule) {
             case 0:
                 content.innerHTML = this.renderIntro();
-                this.narrate("Bun venit la Teoria Culorilor!");
+                this.narrate("Welcome to Color Theory!");
                 break;
             case 1:
                 content.innerHTML = this.renderModule1_PrimaryColors();
-                this.narrate("Să începem cu bazele. Culorile primare sunt roșu, galben și albastru. De ce se numesc primare? Pentru că nu pot fi create prin amestecarea altor culori. Gândește-te la ele ca la ingredientele de bază din care faci toate celelalte culori.");
+                this.narrate("Let's start with the basics. The primary colors are red, yellow, and blue. Why are they called primary? Because they cannot be created by mixing other colors. Think of them as the basic ingredients from which you make all other colors.");
                 break;
             case 2:
                 content.innerHTML = this.renderModule2_SecondaryColors();
-                this.narrate("Acum vine partea distractivă! Când amesteci două culori primare, obții o culoare secundară. Galben plus Albastru face Verde! Roșu plus Galben face Portocaliu! Și Roșu plus Albastru face Violet!");
+                this.narrate("Now comes the fun part! When you mix two primary colors, you get a secondary color. Yellow plus Blue makes Green! Red plus Yellow makes Orange! And Red plus Blue makes Purple!");
                 break;
             case 3:
                 content.innerHTML = this.renderModule3_ColorWheel();
-                this.narrate("Acesta este cercul cromatic complet! Conține toate cele 12 culori: 3 primare, 3 secundare și 6 terțiare. Culorile complementare sunt opuse pe cerc și creează cel mai puternic contrast.");
+                this.narrate("This is the complete color wheel! It contains all 12 colors: 3 primary, 3 secondary, and 6 tertiary. Complementary colors are opposite on the wheel and create the strongest contrast.");
                 break;
             case 4:
                 content.innerHTML = this.renderModule4_Harmonies();
-                this.narrate("Învață să combini culorile folosind regula 60-30-10: 60% culoare dominantă, 30% secundară, și 10% accent. Această regulă face desenul tău să arate profesional!");
+                this.narrate("Learn to combine colors using the 60-30-10 rule: 60% dominant color, 30% secondary, and 10% accent. This rule makes your drawing look professional!");
                 break;
             case 5:
                 content.innerHTML = this.renderQuiz();
                 this.startQuiz();
-                this.narrate("Acum să vedem cât de bine ai învățat! Răspunde la cele 5 întrebări.");
+                this.narrate("Now let's see how well you've learned! Answer the 5 questions.");
                 break;
         }
 
@@ -643,7 +643,7 @@ export default class ColorTheoryLesson {
         const nextBtn = document.getElementById('nextModule');
 
         prevBtn.style.display = this.currentModule > 0 ? 'block' : 'none';
-        nextBtn.textContent = this.currentModule === this.totalModules ? 'Finalizează →' : 'Următorul →';
+        nextBtn.textContent = this.currentModule === this.totalModules ? 'Finish →' : 'Next →';
     }
 
     narrate(text) {
@@ -652,19 +652,19 @@ export default class ColorTheoryLesson {
         this.synth.cancel(); // Stop previous narration
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ro-RO';
+        utterance.lang = 'en-US';
         utterance.rate = 0.85; // Slightly slower for better clarity
         utterance.pitch = 1.0;
         utterance.volume = 0.8;
 
-        // Try to find and use a Romanian voice if available
+        // Try to find and use an English voice if available
         const voices = this.synth.getVoices();
-        const romanianVoice = voices.find(voice =>
-            voice.lang === 'ro-RO' || voice.lang.startsWith('ro')
+        const englishVoice = voices.find(voice =>
+            voice.lang === 'en-US' || voice.lang.startsWith('en')
         );
 
-        if (romanianVoice) {
-            utterance.voice = romanianVoice;
+        if (englishVoice) {
+            utterance.voice = englishVoice;
         }
 
         this.synth.speak(utterance);
@@ -673,28 +673,28 @@ export default class ColorTheoryLesson {
     startQuiz() {
         const questions = [
             {
-                question: "Care sunt cele 3 culori primare?",
-                options: ["Roșu, Verde, Albastru", "Roșu, Galben, Albastru", "Verde, Portocaliu, Violet"],
+                question: "What are the 3 primary colors?",
+                options: ["Red, Green, Blue", "Red, Yellow, Blue", "Green, Orange, Purple"],
                 correct: 1
             },
             {
-                question: "Ce culoare obții când amesteci Roșu cu Galben?",
-                options: ["Verde", "Portocaliu", "Violet"],
+                question: "What color do you get when you mix Red with Yellow?",
+                options: ["Green", "Orange", "Purple"],
                 correct: 1
             },
             {
-                question: "Culorile complementare sunt:",
-                options: ["Alăturate pe cerc", "Opuse pe cerc", "La distanță egală pe cerc"],
+                question: "Complementary colors are:",
+                options: ["Adjacent on the wheel", "Opposite on the wheel", "Evenly spaced on the wheel"],
                 correct: 1
             },
             {
-                question: "Regula 60-30-10 se referă la:",
-                options: ["Timpul de desen", "Proporția culorilor în paletă", "Numărul de culori"],
+                question: "The 60-30-10 rule refers to:",
+                options: ["Drawing time", "Color proportions in the palette", "Number of colors"],
                 correct: 1
             },
             {
-                question: "Ce emoție transmite culoarea Albastru?",
-                options: ["Pasiune și energie", "Calm și încredere", "Veselie și optimism"],
+                question: "What emotion does the color Blue convey?",
+                options: ["Passion and energy", "Calm and trust", "Cheerfulness and optimism"],
                 correct: 1
             }
         ];
@@ -711,7 +711,7 @@ export default class ColorTheoryLesson {
             const q = questions[currentQ];
             container.innerHTML = `
                 <div style="background: white; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow);">
-                    <div style="color: var(--text-gray); margin-bottom: 1rem;">Întrebarea ${currentQ + 1} din ${questions.length}</div>
+                    <div style="color: var(--text-gray); margin-bottom: 1rem;">Question ${currentQ + 1} of ${questions.length}</div>
                     <h3 style="color: var(--primary); margin-bottom: 2rem;">${q.question}</h3>
                     <div class="quiz-options">
                         ${q.options.map((opt, i) => `
@@ -790,20 +790,20 @@ export default class ColorTheoryLesson {
         scoreEl.textContent = `${this.quizScore}/5`;
 
         if (scorePercent >= 80) {
-            titleEl.textContent = '🎉 Excelent!';
+            titleEl.textContent = '🎉 Excellent!';
             titleEl.style.color = 'var(--success)';
-            messageEl.textContent = 'Ai stăpânit teoria culorilor! Ești gata să creezi palete minunate!';
-            this.narrate('Felicitări! Ai obținut un scor excelent! Ești gata să folosești culorile ca un adevărat artist!');
+            messageEl.textContent = 'You\'ve mastered color theory! You\'re ready to create wonderful palettes!';
+            this.narrate('Congratulations! You got an excellent score! You\'re ready to use colors like a true artist!');
         } else if (scorePercent >= 60) {
-            titleEl.textContent = '👍 Bine!';
+            titleEl.textContent = '👍 Good Job!';
             titleEl.style.color = 'var(--warning)';
-            messageEl.textContent = 'Bună treabă! Poate vrei să revizuiești lecția pentru a stăpâni perfect conceptele.';
-            this.narrate('Bună treabă! Ai înțeles majoritatea conceptelor. Poate vrei să revizuiești lecția pentru a stăpâni perfect teoria culorilor.');
+            messageEl.textContent = 'Nice work! You might want to review the lesson to master the concepts perfectly.';
+            this.narrate('Good job! You understood most of the concepts. You might want to review the lesson to master color theory perfectly.');
         } else {
-            titleEl.textContent = '📚 Continuă să exersezi!';
+            titleEl.textContent = '📚 Keep Practicing!';
             titleEl.style.color = 'var(--error)';
-            messageEl.textContent = 'Nu-i nimic! Revizuiește lecția și încearcă din nou. Practica face pe maestrul!';
-            this.narrate('Nu-i nimic! Revizuiește lecția și încearcă din nou. Cu puțină practică, vei stăpâni teoria culorilor!');
+            messageEl.textContent = 'No worries! Review the lesson and try again. Practice makes perfect!';
+            this.narrate('No worries! Review the lesson and try again. With a little practice, you\'ll master color theory!');
         }
 
         // Mark lesson as completed in state

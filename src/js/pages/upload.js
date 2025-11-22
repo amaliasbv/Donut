@@ -12,9 +12,9 @@ export default class UploadPage {
         return `
             <div class="page-container">
                 <header class="mb-4">
-                    <h1 style="color: var(--primary); font-size: 2.5rem;">📸 Încarcă Desen</h1>
+                    <h1 style="color: var(--primary); font-size: 2.5rem;">📸 Upload Drawing</h1>
                     <p style="font-size: 1.1rem; color: var(--text-gray);">
-                        Primește feedback instant de la AI
+                        Get instant AI feedback
                     </p>
                 </header>
 
@@ -27,14 +27,14 @@ export default class UploadPage {
                             <div style="text-align: center;">
                                 <div style="font-size: 3rem; margin-bottom: 1rem;">📁</div>
                                 <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">
-                                    Trage fișierul aici sau
+                                    Drag file here or
                                 </p>
                                 <button class="btn btn-primary" id="selectFileBtn">
-                                    Selectează fișier
+                                    Select file
                                 </button>
                                 <input type="file" id="fileInput" accept="image/*" style="display: none;">
                                 <p style="font-size: 0.875rem; color: var(--text-gray); margin-top: 1rem;">
-                                    Acceptă: JPG, PNG, WEBP (max 10MB)
+                                    Accepts: JPG, PNG, WEBP (max 10MB)
                                 </p>
                             </div>
                         </div>
@@ -42,26 +42,26 @@ export default class UploadPage {
                         <div id="preview" style="display: none; margin-top: 1rem;">
                             <img id="previewImage" style="width: 100%; border-radius: var(--radius); margin-bottom: 1rem;">
                             <button class="btn btn-danger" id="removeFileBtn" style="width: 100%; margin-bottom: 0.5rem;">
-                                🗑️ Șterge
+                                🗑️ Delete
                             </button>
                             <button class="btn btn-primary" id="analyzeBtn" style="width: 100%;">
-                                🤖 Analizează cu AI
+                                🤖 Analyze with AI
                             </button>
                         </div>
 
                         <div id="analyzing" style="display: none; text-align: center; padding: 2rem;">
                             <div class="spinner" style="margin: 0 auto 1rem;"></div>
-                            <p>Analizez desenul... Poate dura 10-30 secunde</p>
+                            <p>Analyzing drawing... May take 10-30 seconds</p>
                         </div>
                     </div>
 
                     <!-- Feedback Section -->
                     <div class="card">
-                        <h2 style="color: var(--primary); margin-bottom: 1rem;">💬 Feedback AI</h2>
+                        <h2 style="color: var(--primary); margin-bottom: 1rem;">💬 AI Feedback</h2>
                         <div id="feedbackContainer">
                             <div style="text-align: center; padding: 3rem; color: var(--text-gray);">
                                 <div style="font-size: 3rem; margin-bottom: 1rem;">🤖</div>
-                                <p>Încarcă un desen pentru a primi feedback</p>
+                                <p>Upload a drawing to receive feedback</p>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ export default class UploadPage {
 
                 <!-- Recent Submissions -->
                 <div class="mt-4">
-                    <h2 style="color: var(--primary); margin-bottom: 1rem;">📋 Desene Recente</h2>
+                    <h2 style="color: var(--primary); margin-bottom: 1rem;">📋 Recent Drawings</h2>
                     <div class="grid grid-4">
                         ${this.renderRecentSubmissions()}
                     </div>
@@ -95,10 +95,10 @@ export default class UploadPage {
 
     renderRecentSubmissions() {
         const submissions = [
-            { id: 1, title: 'Portret', date: 'Azi', score: 85, thumbnail: '👤' },
-            { id: 2, title: 'Natură Statică', date: 'Ieri', score: 78, thumbnail: '🍎' },
-            { id: 3, title: 'Peisaj', date: 'Acum 2 zile', score: 92, thumbnail: '🏞️' },
-            { id: 4, title: 'Animale', date: 'Acum 3 zile', score: 70, thumbnail: '🐱' }
+            { id: 1, title: 'Portrait', date: 'Today', score: 85, thumbnail: '👤' },
+            { id: 2, title: 'Still Life', date: 'Yesterday', score: 78, thumbnail: '🍎' },
+            { id: 3, title: 'Landscape', date: '2 days ago', score: 92, thumbnail: '🏞️' },
+            { id: 4, title: 'Animals', date: '3 days ago', score: 70, thumbnail: '🐱' }
         ];
 
         return submissions.map(sub => `
@@ -208,34 +208,34 @@ export default class UploadPage {
             overallScore: 82,
             proportions: {
                 score: 85,
-                feedback: 'Proporțiile sunt în general bune. Nasul este puțin prea scurt față de restul feței. Încearcă să măsori distanțele între trăsături.'
+                feedback: 'Proportions are generally good. The nose is slightly too short compared to the rest of the face. Try measuring the distances between features.'
             },
             lighting: {
                 score: 78,
-                feedback: 'Lumina este corect plasată, dar umbrele ar trebui să fie mai soft la tranziții. Folosește blending pentru tranziții mai naturale.'
+                feedback: 'Lighting is correctly placed, but shadows should be softer at transitions. Use blending for more natural transitions.'
             },
             lineQuality: {
                 score: 90,
-                feedback: 'Liniile sunt sigure și clare! Variația grosimii liniilor adaugă profunzime.'
+                feedback: 'Lines are confident and clear! Line weight variation adds depth.'
             },
             composition: {
                 score: 75,
-                feedback: 'Compoziția este decentă, dar subiectul este prea centrat. Încearcă regula treimilor pentru compoziții mai dinamice.'
+                feedback: 'Composition is decent, but the subject is too centered. Try the rule of thirds for more dynamic compositions.'
             },
             strengths: [
-                'Linii clare și sigure',
-                'Utilizare bună a contrast-ului',
-                'Atenție la detalii'
+                'Clear and confident lines',
+                'Good use of contrast',
+                'Attention to detail'
             ],
             improvements: [
-                'Lucrează la proporțiile faciale',
-                'Îmbunătățește tranziția umbrelor',
-                'Experimentează cu compoziții off-center'
+                'Work on facial proportions',
+                'Improve shadow transitions',
+                'Experiment with off-center compositions'
             ],
             nextSteps: [
-                'Practică desenarea proporțiilor faciale cu grila Loomis',
-                'Studiază tutorialul "Lumină și Umbre"',
-                'Încearcă tema "Portret în Perspectivă 3/4"'
+                'Practice drawing facial proportions with the Loomis grid',
+                'Study the "Light and Shadow" tutorial',
+                'Try the "Portrait in 3/4 Perspective" assignment'
             ]
         };
     }
@@ -246,33 +246,33 @@ export default class UploadPage {
                 <div style="font-size: 3rem; color: ${feedback.overallScore >= 80 ? 'var(--success)' : 'var(--warning)'};">
                     ${feedback.overallScore}/100
                 </div>
-                <p style="font-size: 1.2rem; font-weight: bold;">Score Global</p>
+                <p style="font-size: 1.2rem; font-weight: bold;">Overall Score</p>
             </div>
 
             <div class="mb-3">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">📊 Analiză Detaliată</h3>
-                ${this.renderFeedbackSection('Proporții', feedback.proportions)}
-                ${this.renderFeedbackSection('Lumină & Umbre', feedback.lighting)}
-                ${this.renderFeedbackSection('Calitate Linii', feedback.lineQuality)}
-                ${this.renderFeedbackSection('Compoziție', feedback.composition)}
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">📊 Detailed Analysis</h3>
+                ${this.renderFeedbackSection('Proportions', feedback.proportions)}
+                ${this.renderFeedbackSection('Light & Shadow', feedback.lighting)}
+                ${this.renderFeedbackSection('Line Quality', feedback.lineQuality)}
+                ${this.renderFeedbackSection('Composition', feedback.composition)}
             </div>
 
             <div class="mb-3">
-                <h3 style="color: var(--success); margin-bottom: 0.5rem;">✓ Puncte Forte:</h3>
+                <h3 style="color: var(--success); margin-bottom: 0.5rem;">✓ Strengths:</h3>
                 <ul style="padding-left: 1.5rem;">
                     ${feedback.strengths.map(s => `<li>${s}</li>`).join('')}
                 </ul>
             </div>
 
             <div class="mb-3">
-                <h3 style="color: var(--warning); margin-bottom: 0.5rem;">📈 De Îmbunătățit:</h3>
+                <h3 style="color: var(--warning); margin-bottom: 0.5rem;">📈 Areas to Improve:</h3>
                 <ul style="padding-left: 1.5rem;">
                     ${feedback.improvements.map(i => `<li>${i}</li>`).join('')}
                 </ul>
             </div>
 
             <div>
-                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">🎯 Pași Următori:</h3>
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">🎯 Next Steps:</h3>
                 <ul style="padding-left: 1.5rem;">
                     ${feedback.nextSteps.map(step => `<li>${step}</li>`).join('')}
                 </ul>

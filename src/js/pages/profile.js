@@ -25,7 +25,7 @@ export default class ProfilePage {
                             <p style="color: var(--text-gray); margin-bottom: 1rem;">${user.email}</p>
 
                             <div style="display: inline-block; background: var(--primary); color: white; padding: 0.5rem 1.5rem; border-radius: 20px; margin-bottom: 1rem;">
-                                ⭐ Nivel ${user.level} - ${user.xp} XP
+                                ⭐ Level ${user.level} - ${user.xp} XP
                             </div>
 
                             <div style="margin-bottom: 1rem;">
@@ -37,16 +37,16 @@ export default class ProfilePage {
                                     "></div>
                                 </div>
                                 <p style="font-size: 0.875rem; color: var(--text-gray); margin-top: 0.5rem;">
-                                    ${500 - (user.xp % 500)} XP până la Nivel ${user.level + 1}
+                                    ${500 - (user.xp % 500)} XP until Level ${user.level + 1}
                                 </p>
                             </div>
 
-                            <button class="btn btn-secondary" style="width: 100%;">Editează Profil</button>
+                            <button class="btn btn-secondary" style="width: 100%;">Edit Profile</button>
                         </div>
 
                         <!-- Skills Card -->
                         <div class="card">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem;">🎨 Abilități</h3>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">🎨 Skills</h3>
                             ${this.renderSkills(progress.skills)}
                         </div>
                     </div>
@@ -55,11 +55,11 @@ export default class ProfilePage {
                     <div>
                         <!-- Progress Stats -->
                         <div class="card mb-3">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem;">📊 Progres</h3>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">📊 Progress</h3>
 
                             <div style="margin-bottom: 1.5rem;">
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span>📚 Lecții</span>
+                                    <span>📚 Lessons</span>
                                     <span style="font-weight: bold;">${progress.lessonsCompleted}/${progress.totalLessons}</span>
                                 </div>
                                 <div style="background: var(--bg-light); height: 8px; border-radius: 10px; overflow: hidden;">
@@ -73,7 +73,7 @@ export default class ProfilePage {
 
                             <div>
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span>📝 Teme</span>
+                                    <span>📝 Assignments</span>
                                     <span style="font-weight: bold;">${progress.assignmentsCompleted}/${progress.totalAssignments}</span>
                                 </div>
                                 <div style="background: var(--bg-light); height: 8px; border-radius: 10px; overflow: hidden;">
@@ -88,7 +88,7 @@ export default class ProfilePage {
 
                         <!-- Badges Card -->
                         <div class="card">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem;">🏆 Badge-uri</h3>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">🏆 Badges</h3>
                             <div class="grid grid-3">
                                 ${this.renderBadges(badges)}
                             </div>
@@ -96,16 +96,16 @@ export default class ProfilePage {
 
                         <!-- Account Info -->
                         <div class="card mt-3">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem;">ℹ️ Info Cont</h3>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">ℹ️ Account Info</h3>
                             <div style="color: var(--text-gray);">
                                 <p style="margin-bottom: 0.5rem;">
-                                    <strong>Membru din:</strong> ${new Date(user.joinedDate).toLocaleDateString('ro-RO')}
+                                    <strong>Member since:</strong> ${new Date(user.joinedDate).toLocaleDateString('en-US')}
                                 </p>
                                 <p style="margin-bottom: 0.5rem;">
-                                    <strong>Desene încărcate:</strong> 12
+                                    <strong>Drawings uploaded:</strong> 12
                                 </p>
                                 <p>
-                                    <strong>Feedback-uri primite:</strong> 10
+                                    <strong>Feedbacks received:</strong> 10
                                 </p>
                             </div>
                         </div>
@@ -114,7 +114,7 @@ export default class ProfilePage {
 
                 <!-- Gallery Section -->
                 <div class="mt-4">
-                    <h2 style="color: var(--primary); margin-bottom: 1rem;">🖼️ Galeria Mea</h2>
+                    <h2 style="color: var(--primary); margin-bottom: 1rem;">🖼️ My Gallery</h2>
                     <div class="grid grid-4">
                         ${this.renderGallery()}
                     </div>
@@ -144,11 +144,11 @@ export default class ProfilePage {
 
     translateSkill(skill) {
         const translations = {
-            color: 'Culoare',
-            shading: 'Umbre',
-            perspective: 'Perspectivă',
-            composition: 'Compoziție',
-            anatomy: 'Anatomie'
+            color: 'Color',
+            shading: 'Shading',
+            perspective: 'Perspective',
+            composition: 'Composition',
+            anatomy: 'Anatomy'
         };
         return translations[skill] || skill;
     }
@@ -158,21 +158,21 @@ export default class ProfilePage {
             <div class="card text-center" style="opacity: ${badge.earned ? 1 : 0.4}; padding: 1rem;">
                 <div style="font-size: 3rem; margin-bottom: 0.5rem;">${badge.icon}</div>
                 <p style="font-size: 0.875rem; font-weight: bold;">${badge.name}</p>
-                ${badge.earned ? '<p style="font-size: 0.75rem; color: var(--success);">✓ Obținut</p>' : '<p style="font-size: 0.75rem; color: var(--text-gray);">Blocat</p>'}
+                ${badge.earned ? '<p style="font-size: 0.75rem; color: var(--success);">✓ Earned</p>' : '<p style="font-size: 0.75rem; color: var(--text-gray);">Locked</p>'}
             </div>
         `).join('');
     }
 
     renderGallery() {
         const gallery = [
-            { id: 1, title: 'Portret', emoji: '👤', date: 'Azi' },
-            { id: 2, title: 'Natură', emoji: '🍎', date: 'Ieri' },
-            { id: 3, title: 'Peisaj', emoji: '🏞️', date: '2 zile' },
-            { id: 4, title: 'Animal', emoji: '🐱', date: '3 zile' },
-            { id: 5, title: 'Casă', emoji: '🏠', date: '4 zile' },
-            { id: 6, title: 'Floare', emoji: '🌸', date: '5 zile' },
-            { id: 7, title: 'Abstract', emoji: '🎨', date: '6 zile' },
-            { id: 8, title: 'Cerc', emoji: '⭕', date: '7 zile' }
+            { id: 1, title: 'Portrait', emoji: '👤', date: 'Today' },
+            { id: 2, title: 'Nature', emoji: '🍎', date: 'Yesterday' },
+            { id: 3, title: 'Landscape', emoji: '🏞️', date: '2 days' },
+            { id: 4, title: 'Animal', emoji: '🐱', date: '3 days' },
+            { id: 5, title: 'House', emoji: '🏠', date: '4 days' },
+            { id: 6, title: 'Flower', emoji: '🌸', date: '5 days' },
+            { id: 7, title: 'Abstract', emoji: '🎨', date: '6 days' },
+            { id: 8, title: 'Circle', emoji: '⭕', date: '7 days' }
         ];
 
         return gallery.map(item => `
@@ -190,7 +190,7 @@ export default class ProfilePage {
         // Gallery items click
         document.querySelectorAll('.gallery-item').forEach(item => {
             item.addEventListener('click', () => {
-                alert('Va deschide detaliile desenului cu feedback-ul primit!');
+                alert('Will open drawing details with feedback received!');
             });
         });
 
@@ -207,13 +207,13 @@ export default class ProfilePage {
             <div class="modal-overlay">
                 <div class="modal">
                     <div class="modal-header">
-                        <h2>✏️ Editează Profil</h2>
+                        <h2>✏️ Edit Profile</h2>
                         <button class="modal-close">&times;</button>
                     </div>
                     <div class="modal-body">
                         <form id="editProfileForm">
                             <div class="form-group">
-                                <label class="form-label">Nume:</label>
+                                <label class="form-label">Name:</label>
                                 <input type="text" class="form-input" value="${user.name}" required>
                             </div>
                             <div class="form-group">
@@ -224,7 +224,7 @@ export default class ProfilePage {
                                 <label class="form-label">Avatar (emoji):</label>
                                 <input type="text" class="form-input" value="${user.avatar || ''}" placeholder="👤">
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Salvează</button>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Save</button>
                         </form>
                     </div>
                 </div>
@@ -240,7 +240,7 @@ export default class ProfilePage {
 
         modalContainer.querySelector('#editProfileForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Salvarea profilului va fi implementată cu backend!');
+            alert('Profile saving will be implemented with backend!');
             modalContainer.innerHTML = '';
         });
     }

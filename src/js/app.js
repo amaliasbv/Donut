@@ -69,9 +69,9 @@ class App {
 
         // Mock badges
         this.state.set('badges', [
-            { id: 1, name: 'Primii Pași', icon: '🎨', earned: true },
-            { id: 2, name: 'Maestru Culori', icon: '🌈', earned: true },
-            { id: 3, name: 'Expert Umbre', icon: '🌓', earned: false }
+            { id: 1, name: 'First Steps', icon: '🎨', earned: true },
+            { id: 2, name: 'Color Master', icon: '🌈', earned: true },
+            { id: 3, name: 'Shadow Expert', icon: '🌓', earned: false }
         ]);
     }
 

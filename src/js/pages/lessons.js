@@ -13,82 +13,82 @@ export default class LessonsPage {
         return [
             {
                 id: 1,
-                title: 'Teoria Culorilor',
-                description: 'Învață despre cercul cromatic, complementaritate și armonii de culori',
+                title: 'Color Theory',
+                description: 'Learn about the color wheel, complementary colors, and color harmonies',
                 difficulty: 'beginner',
                 duration: 30,
                 completed: true,
-                category: 'Fundamente',
+                category: 'Fundamentals',
                 thumbnail: '🎨'
             },
             {
                 id: 2,
-                title: 'Lumină și Umbre',
-                description: 'Înțelege valoarea tonală, lumina ambientală și direcțională',
+                title: 'Light and Shadow',
+                description: 'Understand tonal value, ambient and directional lighting',
                 difficulty: 'beginner',
                 duration: 45,
                 completed: true,
-                category: 'Fundamente',
+                category: 'Fundamentals',
                 thumbnail: '🌓'
             },
             {
                 id: 3,
-                title: 'Perspectivă: 1 Punct',
-                description: 'Bazele perspectivei cu un singur punct de fugă',
+                title: 'Perspective: 1-Point',
+                description: 'Basics of perspective with one vanishing point',
                 difficulty: 'intermediate',
                 duration: 60,
                 completed: false,
-                category: 'Perspectivă',
+                category: 'Perspective',
                 thumbnail: '📐'
             },
             {
                 id: 4,
-                title: 'Compoziție: Regula Treimilor',
-                description: 'Cum să compui desene echilibrate și atractive',
+                title: 'Composition: Rule of Thirds',
+                description: 'How to compose balanced and attractive drawings',
                 difficulty: 'beginner',
                 duration: 40,
                 completed: true,
-                category: 'Compoziție',
+                category: 'Composition',
                 thumbnail: '📐'
             },
             {
                 id: 5,
-                title: 'Anatomie: Proporții Faciale',
-                description: 'Proporțiile de bază pentru desenarea feței',
+                title: 'Anatomy: Facial Proportions',
+                description: 'Basic proportions for drawing the face',
                 difficulty: 'intermediate',
                 duration: 90,
                 completed: false,
-                category: 'Anatomie',
+                category: 'Anatomy',
                 thumbnail: '👤'
             },
             {
                 id: 6,
-                title: 'Shading Tehnici',
-                description: 'Hatching, cross-hatching, și blending',
+                title: 'Shading Techniques',
+                description: 'Hatching, cross-hatching, and blending',
                 difficulty: 'intermediate',
                 duration: 50,
                 completed: false,
-                category: 'Tehnici',
+                category: 'Techniques',
                 thumbnail: '✏️'
             },
             {
                 id: 7,
-                title: 'Perspectivă: 2 Puncte',
-                description: 'Perspectivă avansată cu două puncte de fugă',
+                title: 'Perspective: 2-Point',
+                description: 'Advanced perspective with two vanishing points',
                 difficulty: 'advanced',
                 duration: 75,
                 completed: false,
-                category: 'Perspectivă',
+                category: 'Perspective',
                 thumbnail: '🏙️'
             },
             {
                 id: 8,
-                title: 'Anatomie: Corp Uman',
-                description: 'Proporții și structură a corpului uman',
+                title: 'Anatomy: Human Body',
+                description: 'Proportions and structure of the human body',
                 difficulty: 'advanced',
                 duration: 120,
                 completed: false,
-                category: 'Anatomie',
+                category: 'Anatomy',
                 thumbnail: '🧍'
             }
         ];
@@ -98,19 +98,19 @@ export default class LessonsPage {
         return `
             <div class="page-container">
                 <header class="mb-4">
-                    <h1 style="color: var(--primary); font-size: 2.5rem;">📚 Lecții</h1>
+                    <h1 style="color: var(--primary); font-size: 2.5rem;">📚 Lessons</h1>
                     <p style="font-size: 1.1rem; color: var(--text-gray);">
-                        Învață teorie artistică pas cu pas
+                        Learn art theory step by step
                     </p>
                 </header>
 
                 <!-- Filters -->
                 <div class="flex gap-2 mb-4" style="flex-wrap: wrap;">
-                    <button class="filter-btn active" data-filter="all">Toate</button>
-                    <button class="filter-btn" data-filter="beginner">Începător</button>
-                    <button class="filter-btn" data-filter="intermediate">Intermediar</button>
-                    <button class="filter-btn" data-filter="advanced">Avansat</button>
-                    <button class="filter-btn" data-filter="completed">Completate</button>
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="beginner">Beginner</button>
+                    <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                    <button class="filter-btn" data-filter="advanced">Advanced</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
                 </div>
 
                 <!-- Lessons Grid -->
@@ -132,7 +132,7 @@ export default class LessonsPage {
 
         return filteredLessons.map(lesson => `
             <div class="card lesson-card" data-lesson-id="${lesson.id}">
-                ${lesson.completed ? '<div class="completed-badge" style="position: absolute; top: 10px; right: 10px; background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem;">✓ Completat</div>' : ''}
+                ${lesson.completed ? '<div class="completed-badge" style="position: absolute; top: 10px; right: 10px; background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem;">✓ Completed</div>' : ''}
 
                 <div style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">${lesson.thumbnail}</div>
 
@@ -153,7 +153,7 @@ export default class LessonsPage {
                 </div>
 
                 <button class="btn ${lesson.completed ? 'btn-secondary' : 'btn-primary'}" style="width: 100%;">
-                    ${lesson.completed ? 'Revizuiește' : 'Începe Lecția'}
+                    ${lesson.completed ? 'Review' : 'Start Lesson'}
                 </button>
             </div>
         `).join('');
@@ -161,9 +161,9 @@ export default class LessonsPage {
 
     translateDifficulty(difficulty) {
         const translations = {
-            beginner: 'Începător',
-            intermediate: 'Intermediar',
-            advanced: 'Avansat'
+            beginner: 'Beginner',
+            intermediate: 'Intermediate',
+            advanced: 'Advanced'
         };
         return translations[difficulty] || difficulty;
     }
@@ -244,7 +244,7 @@ export default class LessonsPage {
                     <div class="modal-body">
                         <div class="flex-between mb-3">
                             <span class="card-badge badge-${lesson.difficulty}">${this.translateDifficulty(lesson.difficulty)}</span>
-                            <span style="color: var(--text-gray);">⏱️ ${lesson.duration} minute</span>
+                            <span style="color: var(--text-gray);">⏱️ ${lesson.duration} minutes</span>
                         </div>
 
                         <p style="color: var(--text-gray); margin-bottom: 2rem; font-size: 1.1rem;">
@@ -252,7 +252,7 @@ export default class LessonsPage {
                         </p>
 
                         <div class="mb-3">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Ce vei învăța:</h3>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">📋 What you'll learn:</h3>
                             <ul style="list-style: none; padding: 0;">
                                 ${this.getLessonObjectives(lesson.id).map(obj => `
                                     <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
@@ -263,14 +263,14 @@ export default class LessonsPage {
                         </div>
 
                         <div class="mb-3">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem;">📝 Conținut:</h3>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">📝 Content:</h3>
                             <p style="color: var(--text-gray);">
                                 ${this.getLessonContent(lesson.id)}
                             </p>
                         </div>
 
-                        <button class="btn btn-primary" style="width: 100%;" onclick="alert('Lecția va fi implementată cu conținut complet!')">
-                            ${lesson.completed ? '🔄 Revizuiește Lecția' : '▶️ Începe Lecția'}
+                        <button class="btn btn-primary" style="width: 100%;" onclick="alert('Lesson will be implemented with full content!')">
+                            ${lesson.completed ? '🔄 Review Lesson' : '▶️ Start Lesson'}
                         </button>
                     </div>
                 </div>
@@ -294,33 +294,33 @@ export default class LessonsPage {
     getLessonObjectives(lessonId) {
         const objectives = {
             1: [
-                'Înțelege cercul cromatic și relațiile dintre culori',
-                'Identifică culorile complementare și armonii',
-                'Aplică teoria culorilor în desene',
-                'Înțelege temperatura culorilor'
+                'Understand the color wheel and color relationships',
+                'Identify complementary colors and harmonies',
+                'Apply color theory in drawings',
+                'Understand color temperature'
             ],
             2: [
-                'Recunoști surse de lumină directă și ambientală',
-                'Desenezi umbre corecte bazate pe sursa de lumină',
-                'Înțelegi valoarea tonală și gradarea',
-                'Aplici tehnici de shading'
+                'Recognize direct and ambient light sources',
+                'Draw correct shadows based on light source',
+                'Understand tonal value and gradation',
+                'Apply shading techniques'
             ],
             3: [
-                'Înțelegi conceptul de punct de fugă',
-                'Desenezi obiecte simple în perspectivă',
-                'Construiești scene în perspectivă corectă',
-                'Eviți erorile comune de perspectivă'
+                'Understand the concept of vanishing point',
+                'Draw simple objects in perspective',
+                'Construct scenes in correct perspective',
+                'Avoid common perspective errors'
             ]
         };
         return objectives[lessonId] || [
-            'Obiectiv 1: Înțelegere concepte de bază',
-            'Obiectiv 2: Practică ghidată',
-            'Obiectiv 3: Aplicare în desene'
+            'Objective 1: Understanding basic concepts',
+            'Objective 2: Guided practice',
+            'Objective 3: Application in drawings'
         ];
     }
 
     getLessonContent(lessonId) {
-        return 'Această lecție include teorie detaliată, exemple vizuale, exerciții practice și un mini-test la final. Vei învăța pas cu pas, cu explicații clare și exemple practice.';
+        return 'This lesson includes detailed theory, visual examples, practical exercises, and a mini-quiz at the end. You will learn step by step with clear explanations and practical examples.';
     }
 
     cleanup() {
