@@ -414,5 +414,5 @@ O dată ce ai implementat acestea, poți move la:
 
 *Start small, ship fast, iterate!* 🚀
 
-Creat: 20 Noiembrie 2025
-By: Amalia & Claude
+Created: November 20, 2025
+Assistant: Claude (Anthropic)

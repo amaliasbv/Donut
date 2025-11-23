@@ -1,10 +1,9 @@
 # 📊 RAPORT FINAL - DRAWHUB PROJECT
 
-**Data:** 20 Noiembrie 2025
-**Creat de:** Amalia (16 ani)
-**Asistent tehnic:** Claude (Anthropic)
-**Repository:** [github.com/amaliasbv/Donut](https://github.com/amaliasbv/Donut)
-**Live Demo:** [donut-tkwg.onrender.com](https://donut-tkwg.onrender.com)
+**Date:** November 20, 2025
+**Assistant:** Claude (Anthropic)
+**Repository:** [github.com/yourusername/DrawHub](https://github.com/yourusername/DrawHub)
+**Live Demo:** [drawhub.onrender.com](https://drawhub.onrender.com)
 
 ---
 
@@ -23,11 +22,11 @@
 
 ## 🎯 EVOLUȚIA PROIECTULUI
 
-### **Versiunea 1.0 - "Donut Website"**
-- Website simplu cu tema donuts
+### **Version 1.0 - "DrawHub Prototype"**
+- Simple website with drawing theme
 - HTML, CSS, JavaScript basic
-- Button interactiv
-- Primul deployment pe Render
+- Interactive button
+- First deployment on Render
 
 ### **Versiunea 2.0 - "DrawHub Canvas"**
 - Transformat în aplicație de desen
@@ -94,7 +93,7 @@ Total: ~105 pagini de documentație profesională
 ```
 ✅ GitHub Repository: Public, toate commits
 ✅ Render Hosting: Auto-deploy on push
-✅ Live URL: https://donut-tkwg.onrender.com
+✅ Live URL: https://drawhub.onrender.com
 ```
 
 ---
@@ -766,8 +765,8 @@ Target (6 months):
 ## 📞 CONTACT & RESOURCES
 
 ### **Project Links:**
-- GitHub: [github.com/amaliasbv/Donut](https://github.com/amaliasbv/Donut)
-- Live Demo: [donut-tkwg.onrender.com](https://donut-tkwg.onrender.com)
+- GitHub: [github.com/yourusername/DrawHub](https://github.com/yourusername/DrawHub)
+- Live Demo: [drawhub.onrender.com](https://drawhub.onrender.com)
 
 ### **Resources:**
 - OpenAI API: [platform.openai.com](https://platform.openai.com)

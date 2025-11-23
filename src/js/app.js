@@ -44,8 +44,8 @@ class App {
         // Mock user data (later from API)
         this.state.set('user', {
             id: 1,
-            name: 'Amalia',
-            email: 'amalia@drawhub.com',
+            name: 'DrawHub Student',
+            email: 'student@drawhub.com',
             level: 5,
             xp: 1250,
             avatar: null,

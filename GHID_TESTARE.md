@@ -1,6 +1,6 @@
 # 🧪 GHID DE TESTARE PAS CU PAS - Lecția "Teoria Culorilor"
 
-**URL:** https://donut-rkhb.onrender.com
+**URL:** https://drawhub.onrender.com
 
 ---
 
@@ -23,7 +23,7 @@
 
 ### 1.1 Deschide site-ul
 ```
-URL: https://donut-rkhb.onrender.com
+URL: https://drawhub.onrender.com
 ```
 
 ### 1.2 Verifică Console (F12)
@@ -41,7 +41,7 @@ URL: https://donut-rkhb.onrender.com
 - Navbar cu logo "🎨 DrawHub"
 - 5 linkuri: Acasă, Lecții, Teme, Upload, Profil
 - Buton "Login" în dreapta
-- Footer cu "Creat cu ❤️ de Amalia"
+- Footer cu "Created with ❤️"
 
 **✅ TESTEAZĂ:**
 - [ ] Hover pe linkuri navbar → background se schimbă
@@ -56,7 +56,7 @@ URL: https://donut-rkhb.onrender.com
 ```
 Click pe "Lecții" din navbar
 SAU
-Direct: https://donut-rkhb.onrender.com/#lessons
+Direct: https://drawhub.onrender.com/#lessons
 ```
 
 ### 2.2 Verifică afișare
@@ -474,7 +474,7 @@ D) Saturația culorilor
 - [ ] Emoji/Icon: 🏆 sau 🎖️
 - [ ] Heading: "Felicitări!"
 - [ ] Text: "Ai completat cu succes lecția..."
-- [ ] Numele utilizatorului: "Amalia" (din State)
+- [ ] Numele utilizatorului: "DrawHub Student" (din State)
 - [ ] Data: Format românesc (ex: "22 noiembrie 2025")
 - [ ] Scor final afișat: "Scor: X%"
 
@@ -655,7 +655,7 @@ F12 → Network tab → Reload page
 # RAPORT TESTARE - Lecția "Teoria Culorilor"
 
 **Data:** [DATA]
-**Tester:** Amalia
+**Tester:** QA Team
 **Browser:** [BROWSER]
 **Scor general:** [X/100]
 

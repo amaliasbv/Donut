@@ -1,8 +1,8 @@
 # 🎨 DrawHub - Art Learning Platform
 
-> **Aplicație de învățare artistică alimentată de AI, creată de Amalia (16 ani)**
+> **AI-powered interactive art learning platform**
 
-O platformă educațională interactivă care funcționează ca un liceu de artă digital, oferind lecții structurate, teme personalizate și feedback detaliat de la AI pentru desenele utilizatorilor.
+An interactive educational platform that functions as a digital art school, offering structured lessons, personalized assignments, and detailed AI feedback for student drawings.
 
 ---
 
@@ -35,7 +35,7 @@ O aplicație care transformă învățarea artistică prin:
 - [x] Salvare desen ca PNG
 - [x] 4 tutoriale de bază (cerc, casă, floare, față)
 - [x] Support touch pentru mobil
-- [x] Deployed pe Render: [donut-tkwg.onrender.com](https://donut-tkwg.onrender.com)
+- [x] Deployed on Render: [drawhub.onrender.com](https://drawhub.onrender.com)
 
 ### Ce urmează: MVP cu AI (Faza 1)
 - [ ] Backend API (Node.js + Express)
@@ -72,7 +72,7 @@ Hosting:    Render (backend) + Vercel (frontend)
 ## 📁 Structura Proiectului
 
 ```
-Donut/
+DrawHub/
 ├── index.html              # Main page (current DrawHub)
 ├── style.css               # Styling
 ├── script.js               # Canvas drawing logic
@@ -174,8 +174,8 @@ Git
 ### Installation:
 ```bash
 # Clone repo
-git clone https://github.com/amaliasbv/Donut.git
-cd Donut
+git clone https://github.com/yourusername/DrawHub.git
+cd DrawHub
 
 # Install dependencies
 npm install
@@ -229,22 +229,12 @@ MIT License - vezi [LICENSE](LICENSE) pentru detalii
 
 ---
 
-## 👩‍💻 Despre Creator
-
-**Amalia** - 16 ani, pasionată de programare și artă
-
-- 🌱 Învăț: React, Node.js, AI/ML
-- 🎨 Proiecte: DrawHub (art learning platform)
-- 📫 Contact: [GitHub](https://github.com/amaliasbv)
-
----
-
 ## 🙏 Acknowledgments
 
-- OpenAI pentru GPT-4 Vision API
-- Render pentru hosting gratuit
-- Comunitatea open-source
-- Claude (Anthropic) pentru asistență în dezvoltare
+- OpenAI for GPT-4 Vision API
+- Render for free hosting
+- Open-source community
+- Claude (Anthropic) for development assistance
 
 ---
 
@@ -267,4 +257,4 @@ MIT License - vezi [LICENSE](LICENSE) pentru detalii
 
 *"Start small, dream big, iterate fast!"*
 
-Made with ❤️ by Amalia | © 2025
+Made with ❤️ | © 2025

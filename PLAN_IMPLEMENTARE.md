@@ -615,7 +615,7 @@ Create a JSON response with:
 
 ---
 
-*Plan creat: 20 Noiembrie 2025*
-*Creat de: Amalia (16 ani) cu asistență Claude*
-*Timeline estimat: 6-12 luni pentru v1.0*
-*Revizuit la fiecare 2 săptămâni*
+*Plan created: November 20, 2025*
+*Assistant: Claude (Anthropic)*
+*Estimated timeline: 6-12 months for v1.0*
+*Revised every 2 weeks*

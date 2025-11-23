@@ -1,7 +1,7 @@
 # 🚀 START TESTARE - Lecția "Teoria Culorilor"
 
 **Status:** ✅ READY TO TEST
-**URL:** https://donut-rkhb.onrender.com
+**URL:** https://drawhub.onrender.com
 
 ---
 
@@ -10,7 +10,7 @@
 Render face deploy automat. Așteaptă **~5 minute** de la ultimul commit (commit-ul a fost la ora curentă).
 
 **Cum verifici dacă deploy-ul e gata?**
-1. Deschide https://donut-rkhb.onrender.com
+1. Deschide https://drawhub.onrender.com
 2. Dacă vezi site-ul → READY! ✅
 3. Dacă vezi "Service Unavailable" → Așteaptă încă 2-3 minute
 
@@ -20,7 +20,7 @@ Render face deploy automat. Așteaptă **~5 minute** de la ultimul commit (commi
 
 ### Pasul 1: Verifică că nu mai sunt erori 404
 ```
-1. Deschide site: https://donut-rkhb.onrender.com
+1. Deschide site: https://drawhub.onrender.com
 2. Apasă F12 → Console tab
 3. Reîncarcă pagina (Ctrl+R sau Cmd+R)
 ```
@@ -107,7 +107,7 @@ Dacă scor ≥ 85% (4-5 corecte din 5):
 **✅ CERTIFICAT TREBUIE SĂ APARĂ:**
 - Background gradient albastru-violet
 - Text: "Felicitări!"
-- Numele tău: "Amalia"
+- Numele tău: "DrawHub Student"
 - Data: 22 noiembrie 2025
 - Scor afișat
 - Buton "Descarcă Certificat"
@@ -223,7 +223,7 @@ Overall: [Scor din 10] ⭐
 ---
 
 **Quick Links:**
-- 🌐 **Site:** https://donut-rkhb.onrender.com
+- 🌐 **Site:** https://drawhub.onrender.com
 - 📚 **Ghid complet testare:** [GHID_TESTARE.md](GHID_TESTARE.md)
 - 📊 **Plan testare:** [TESTING_PLAN.md](TESTING_PLAN.md)
 - 📝 **Sumar implementare:** [SUMAR_IMPLEMENTARE.md](SUMAR_IMPLEMENTARE.md)

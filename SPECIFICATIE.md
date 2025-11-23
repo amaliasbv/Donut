@@ -190,6 +190,5 @@ Depinde ce AI folosești, dar în general:
 
 ---
 
-*Documentație creată: 20 Noiembrie 2025*
-*Creat de: Amalia (16 ani)*
-*Asistent: Claude (Anthropic)*
+*Documentation created: November 20, 2025*
+*Assistant: Claude (Anthropic)*

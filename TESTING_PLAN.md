@@ -2,7 +2,7 @@
 
 **Data:** 22 Noiembrie 2025
 **Versiune:** v1.1 - Prima Lecție Interactivă
-**URL de testare:** https://donut-rkhb.onrender.com
+**URL de testare:** https://drawhub.onrender.com
 
 ---
 
@@ -50,7 +50,7 @@ Failed to load resource: the server responded with a status of 404 (index)
 ## 📋 CHECKLIST TESTARE MODULARĂ
 
 ### Modul 1: Server & Infrastructure
-- [ ] **1.1** Site se încarcă la https://donut-rkhb.onrender.com
+- [ ] **1.1** Site se încarcă la https://drawhub.onrender.com
 - [ ] **1.2** Server.js servește fișierele din `/src` corect
 - [ ] **1.3** CSS se încarcă (`/src/css/main.css`)
 - [ ] **1.4** JavaScript modules se încarcă (`/src/js/*.js`)
@@ -274,7 +274,7 @@ Failed to load resource: the server responded with a status of 404 (index)
 # Raport Testare - Lecția "Teoria Culorilor"
 
 **Data:** [DATA]
-**Tester:** Amalia
+**Tester:** QA Team
 **Browser:** [BROWSER + VERSION]
 **Device:** [Desktop/Mobile]
 

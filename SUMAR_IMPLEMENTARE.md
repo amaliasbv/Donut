@@ -236,7 +236,7 @@ User clicks "Teoria Culorilor"
 ### Current Deployment:
 ```
 Platform: Render
-URL: https://donut-rkhb.onrender.com
+URL: https://drawhub.onrender.com
 Status: ✅ LIVE
 
 Last deploy:
@@ -260,7 +260,7 @@ Last deploy:
 ### Imediat (următoarele 10 minute):
 
 1. **Așteaptă deploy Render** (~2-3 minute rămase)
-2. **Deschide:** https://donut-rkhb.onrender.com
+2. **Deschide:** https://drawhub.onrender.com
 3. **Verifică Console** (F12) → trebuie să fie CLEAN (fără 404 errors)
 4. **Quick test:**
    - Click Lecții
@@ -422,21 +422,21 @@ Am implementat:
 
 ---
 
-**🎨 DrawHub - Învață să desenezi cu AI!**
+**🎨 DrawHub - Learn to Draw with AI!**
 
-*Creat cu ❤️ de Amalia*
-*Implementat cu Claude Code*
-*Data: 22 Noiembrie 2025*
+*Created with ❤️*
+*Implemented with Claude Code*
+*Date: November 22, 2025*
 
 ---
 
 ## 📞 CONTACT & SUPPORT
 
-**GitHub:** https://github.com/amaliasbv/Donut
-**Live Site:** https://donut-rkhb.onrender.com
-**Issues:** https://github.com/amaliasbv/Donut/issues
+**GitHub:** https://github.com/yourusername/DrawHub
+**Live Site:** https://drawhub.onrender.com
+**Issues:** https://github.com/yourusername/DrawHub/issues
 
-**Pentru bug reports sau sugestii, deschide un Issue pe GitHub!**
+**For bug reports or suggestions, open an Issue on GitHub!**
 
 ---
 

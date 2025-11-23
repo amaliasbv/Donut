@@ -15,7 +15,7 @@ Transformarea completă a proiectului DrawHub din limba română în limba engle
 ### Status Final:
 ✅ **COMPLET TRADUS** - 100% limba engleză
 ✅ **TTS FUNCȚIONAL** - Voci native en-US disponibile
-✅ **DEPLOYMENT READY** - Live pe https://donut-rkhb.onrender.com
+✅ **DEPLOYMENT READY** - Live pe https://drawhub.onrender.com
 
 ### Efort Total:
 - **Timp executare:** ~20 minute (cu agenți AI specializați)
@@ -487,10 +487,10 @@ EN: "Keep learning! You got 2/5. Review the lesson. 📚"
 **Certificate Text:**
 ```
 RO: "Felicitări! Ai completat cu succes lecția 'Teoria Culorilor'.
-Numele: Amalia | Data: 22 noiembrie 2025 | Scor: 100%"
+Numele: DrawHub Student | Data: 22 noiembrie 2025 | Scor: 100%"
 
 EN: "Congratulations! You have successfully completed the 'Color Theory' lesson.
-Name: Amalia | Date: November 22, 2025 | Score: 100%"
+Name: DrawHub Student | Date: November 22, 2025 | Score: 100%"
 ```
 ✅ Professional certificate language
 
@@ -1146,14 +1146,13 @@ English as base language makes future multi-language support easier:
 **Project:** DrawHub - AI-Powered Drawing Education
 **Version:** v2.0 International (English)
 **Status:** ✅ PRODUCTION READY
-**Live URL:** https://donut-rkhb.onrender.com
+**Live URL:** https://drawhub.onrender.com
 
-**GitHub Repository:** https://github.com/amaliasbv/Donut
+**GitHub Repository:** https://github.com/yourusername/DrawHub
 **Branches:**
 - `main` - English version (current)
 - `romanian-version-backup` - Romanian backup
 
-**Creator:** Amalia
 **Powered by:** Claude Code (Anthropic)
 
 ---
