@@ -9,20 +9,22 @@ import AssignmentsPage from './pages/assignments.js';
 import UploadPage from './pages/upload.js';
 import ProfilePage from './pages/profile.js';
 import ColorTheoryLesson from './pages/lesson-color-theory.js';
+import OnboardingPage from './pages/onboarding.js';
 
 class App {
     constructor() {
         this.router = new Router();
         this.state = State.getInstance();
 
-        // Make router globally accessible
+        // Make router and state globally accessible
         window.appRouter = this.router;
+        window.appState = this.state;
 
         this.init();
     }
 
     init() {
-        // Initialize state with mock data (will be replaced with API calls)
+        // Initialize state with profile data or defaults
         this.initializeState();
 
         // Register routes
@@ -31,8 +33,14 @@ class App {
         // Setup navigation listeners
         this.setupNavigation();
 
-        // Handle initial route
-        this.router.navigate(window.location.hash.slice(1) || 'home');
+        // Check if user needs onboarding
+        if (!this.state.hasCompletedOnboarding()) {
+            // First-time user - show onboarding
+            this.router.navigate('onboarding');
+        } else {
+            // Returning user - normal flow
+            this.router.navigate(window.location.hash.slice(1) || 'home');
+        }
 
         // Handle browser back/forward
         window.addEventListener('popstate', () => {
@@ -41,16 +49,8 @@ class App {
     }
 
     initializeState() {
-        // Mock user data (later from API)
-        this.state.set('user', {
-            id: 1,
-            name: 'DrawHub Student',
-            email: 'student@drawhub.com',
-            level: 5,
-            xp: 1250,
-            avatar: null,
-            joinedDate: '2025-01-15'
-        });
+        // Initialize user from profile or use defaults
+        this.state.initializeUser();
 
         // Mock progress data
         this.state.set('progress', {
@@ -76,6 +76,7 @@ class App {
     }
 
     registerRoutes() {
+        this.router.addRoute('onboarding', new OnboardingPage());
         this.router.addRoute('home', new HomePage());
         this.router.addRoute('lessons', new LessonsPage());
         this.router.addRoute('assignments', new AssignmentsPage());

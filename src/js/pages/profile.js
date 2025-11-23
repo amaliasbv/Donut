@@ -10,6 +10,7 @@ export default class ProfilePage {
         const user = this.state.get('user');
         const progress = this.state.get('progress');
         const badges = this.state.get('badges');
+        const profile = user.profileData; // User profile from onboarding
 
         return `
             <div class="page-container">
@@ -18,11 +19,31 @@ export default class ProfilePage {
                     <div>
                         <!-- Profile Card -->
                         <div class="card text-center mb-3">
-                            <div style="width: 120px; height: 120px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
-                                ${user.avatar || '👤'}
-                            </div>
+                            ${profile && profile.profilePicture ? `
+                                <div style="width: 120px; height: 120px; margin: 0 auto 1rem; border-radius: 50%; overflow: hidden; border: 4px solid var(--primary);">
+                                    <img src="${profile.profilePicture}" alt="${user.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                            ` : `
+                                <div style="width: 120px; height: 120px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                                    ${user.avatar || '👤'}
+                                </div>
+                            `}
                             <h2 style="color: var(--primary); margin-bottom: 0.5rem;">${user.name}</h2>
                             <p style="color: var(--text-gray); margin-bottom: 1rem;">${user.email}</p>
+
+                            ${profile ? `
+                                <div style="margin-bottom: 1rem; padding: 0.75rem; background: var(--bg-light); border-radius: var(--radius);">
+                                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.25rem;">
+                                        <strong>Experience:</strong> ${this.formatExperience(profile.experienceLevel)}
+                                    </p>
+                                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.25rem;">
+                                        <strong>Preferred Style:</strong> ${this.formatStyle(profile.preferredStyle)}
+                                    </p>
+                                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                                        <strong>Learning Mode:</strong> ${this.formatLearningMode(profile.learningMode)}
+                                    </p>
+                                </div>
+                            ` : ''}
 
                             <div style="display: inline-block; background: var(--primary); color: white; padding: 0.5rem 1.5rem; border-radius: 20px; margin-bottom: 1rem;">
                                 ⭐ Level ${user.level} - ${user.xp} XP
@@ -243,6 +264,34 @@ export default class ProfilePage {
             alert('Profile saving will be implemented with backend!');
             modalContainer.innerHTML = '';
         });
+    }
+
+    formatExperience(level) {
+        const levels = {
+            'beginner': '🌱 Beginner',
+            'intermediate': '🎨 Intermediate',
+            'advanced': '🏆 Advanced'
+        };
+        return levels[level] || level;
+    }
+
+    formatStyle(style) {
+        const styles = {
+            'realistic': '🖼️ Realistic',
+            'anime': '✨ Anime',
+            'cartoon': '🎭 Cartoon',
+            'semi-realistic': '🎨 Semi-Realistic'
+        };
+        return styles[style] || style;
+    }
+
+    formatLearningMode(mode) {
+        const modes = {
+            'video': '🎥 Video Lessons',
+            'text': '📚 Text with Images',
+            'practice': '✏️ Practical Exercises'
+        };
+        return modes[mode] || mode;
     }
 
     cleanup() {}
