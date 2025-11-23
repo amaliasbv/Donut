@@ -10,6 +10,9 @@ import UploadPage from './pages/upload.js';
 import ProfilePage from './pages/profile.js';
 import ColorTheoryLesson from './pages/lesson-color-theory.js';
 import OnboardingPage from './pages/onboarding.js';
+import LoginPage from './pages/login.js';
+import SignupPage from './pages/signup.js';
+import VerifyEmailPage from './pages/verifyEmail.js';
 
 class App {
     constructor() {
@@ -23,23 +26,48 @@ class App {
         this.init();
     }
 
-    init() {
-        // Initialize state with profile data or defaults
-        this.initializeState();
-
-        // Register routes
+    async init() {
+        // Register routes first
         this.registerRoutes();
 
         // Setup navigation listeners
         this.setupNavigation();
 
-        // Check if user needs onboarding
-        if (!this.state.hasCompletedOnboarding()) {
-            // First-time user - show onboarding
-            this.router.navigate('onboarding');
-        } else {
-            // Returning user - normal flow
-            this.router.navigate(window.location.hash.slice(1) || 'home');
+        // Check if user is authenticated
+        if (!window.authService.isAuthenticated()) {
+            // Not logged in - show login page
+            const currentHash = window.location.hash.slice(1);
+
+            // Allow these pages without authentication
+            const publicPages = ['login', 'signup', 'verify-email'];
+
+            if (publicPages.includes(currentHash)) {
+                this.router.navigate(currentHash);
+            } else {
+                this.router.navigate('login');
+            }
+            return;
+        }
+
+        // User is logged in - initialize state
+        await this.initializeState();
+
+        // Check if profile exists
+        try {
+            const profile = await window.authService.getUserProfile();
+
+            if (!profile) {
+                // No profile - redirect to onboarding
+                this.router.navigate('onboarding');
+            } else {
+                // Has profile - normal navigation
+                this.router.navigate(window.location.hash.slice(1) || 'home');
+            }
+        } catch (error) {
+            console.error('Failed to check profile:', error);
+            // On error, redirect to login
+            window.authService.clearTokens();
+            this.router.navigate('login');
         }
 
         // Handle browser back/forward
@@ -48,9 +76,9 @@ class App {
         });
     }
 
-    initializeState() {
+    async initializeState() {
         // Initialize user from profile or use defaults
-        this.state.initializeUser();
+        await this.state.initializeUser();
 
         // Mock progress data
         this.state.set('progress', {
@@ -76,7 +104,13 @@ class App {
     }
 
     registerRoutes() {
+        // Auth pages
+        this.router.addRoute('login', new LoginPage());
+        this.router.addRoute('signup', new SignupPage());
+        this.router.addRoute('verify-email', new VerifyEmailPage());
         this.router.addRoute('onboarding', new OnboardingPage());
+
+        // Main pages
         this.router.addRoute('home', new HomePage());
         this.router.addRoute('lessons', new LessonsPage());
         this.router.addRoute('assignments', new AssignmentsPage());
@@ -102,57 +136,18 @@ class App {
             });
         });
 
-        // Handle login button
+        // Handle login button - redirect to login page
         document.getElementById('loginBtn')?.addEventListener('click', () => {
-            this.showLoginModal();
-        });
-    }
-
-    showLoginModal() {
-        // Simple modal implementation
-        const modalHTML = `
-            <div class="modal-overlay">
-                <div class="modal">
-                    <div class="modal-header">
-                        <h2>Login</h2>
-                        <button class="modal-close">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="loginForm">
-                            <div class="form-group">
-                                <label class="form-label">Email:</label>
-                                <input type="email" class="form-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Password:</label>
-                                <input type="password" class="form-input" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        const modalContainer = document.getElementById('modal-container');
-        modalContainer.innerHTML = modalHTML;
-
-        // Close modal handlers
-        modalContainer.querySelector('.modal-close').addEventListener('click', () => {
-            modalContainer.innerHTML = '';
+            window.location.hash = 'login';
         });
 
-        modalContainer.querySelector('.modal-overlay').addEventListener('click', (e) => {
-            if (e.target === modalContainer.querySelector('.modal-overlay')) {
-                modalContainer.innerHTML = '';
+        // Add logout button handler if user is logged in
+        document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+            if (confirm('Are you sure you want to log out?')) {
+                await window.authService.logout();
+                window.location.hash = 'login';
+                location.reload();
             }
-        });
-
-        // Form submit
-        modalContainer.querySelector('#loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Login functionality will be implemented with backend!');
-            modalContainer.innerHTML = '';
         });
     }
 }
