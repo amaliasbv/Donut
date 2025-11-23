@@ -476,42 +476,64 @@ class OnboardingPage {
         reader.readAsDataURL(file);
     }
 
-    completeOnboarding() {
+    async completeOnboarding() {
         // Mark onboarding as complete
         this.profileData.completedOnboarding = true;
         this.profileData.createdAt = new Date().toISOString();
 
-        // Save to localStorage
-        localStorage.setItem('userProfile', JSON.stringify(this.profileData));
+        try {
+            // Show saving message
+            this.showSuccess('Saving your profile...');
 
-        // Update app state
-        const state = window.appState;
-        state.set('user', {
-            ...state.get('user'),
-            name: this.profileData.name,
-            profileData: this.profileData
-        });
+            // Save to backend API
+            const savedProfile = await window.authService.saveUserProfile(this.profileData);
 
-        // Show success message
-        this.showSuccess();
+            console.log('Profile saved:', savedProfile);
 
-        // Redirect to home after 2 seconds
-        setTimeout(() => {
-            window.appRouter.navigate('home');
-        }, 2000);
+            // Update app state
+            const state = window.appState;
+            state.set('user', {
+                ...state.get('user'),
+                name: savedProfile.name,
+                level: savedProfile.level,
+                xp: savedProfile.xp,
+                avatar: savedProfile.profilePicture,
+                profileData: savedProfile
+            });
+
+            // Show success message
+            this.showSuccess('Profile created successfully! Redirecting...');
+
+            // Redirect to home after 2 seconds
+            setTimeout(() => {
+                window.appRouter.navigate('home');
+            }, 2000);
+
+        } catch (error) {
+            console.error('Failed to save profile:', error);
+            this.showError('Failed to save profile: ' + error.message);
+
+            // Re-enable submit button
+            const submitBtn = document.querySelector('.onboarding-submit-btn');
+            if (submitBtn) {
+                submitBtn.disabled = false;
+            }
+        }
     }
 
-    showSuccess() {
+    showSuccess(message = null) {
         const container = document.querySelector('.onboarding-card');
+        const displayMessage = message || `Your personalized learning journey is ready.`;
+
         container.innerHTML = `
             <div class="onboarding-success">
                 <div class="success-icon">🎉</div>
                 <h2>Welcome to DrawHub, ${this.profileData.name}!</h2>
-                <p>Your personalized learning journey is ready.</p>
+                <p>${displayMessage}</p>
                 <div class="loading-dots">
                     <span>.</span><span>.</span><span>.</span>
                 </div>
-                <p class="redirect-text">Redirecting to your dashboard...</p>
+                <p class="redirect-text">Please wait...</p>
             </div>
         `;
     }
