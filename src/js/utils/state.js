@@ -149,33 +149,65 @@ class State {
     }
 
     /**
-     * Initialize user state from profile or defaults
+     * Initialize user state from API or defaults (async)
      */
-    initializeUser() {
-        const profile = this.loadProfile();
-
-        if (profile && profile.completedOnboarding) {
-            // User has profile - load it
+    async initializeUser() {
+        // Check if user is authenticated
+        if (!window.authService || !window.authService.isAuthenticated()) {
+            // Not logged in - use guest user
             this.set('user', {
-                id: 1,
-                name: profile.name,
-                email: `${profile.name.toLowerCase().replace(/\s+/g, '')}@drawhub.com`,
-                level: 1,
-                xp: 0,
-                avatar: profile.profilePicture || null,
-                joinedDate: profile.createdAt ? profile.createdAt.split('T')[0] : new Date().toISOString().split('T')[0],
-                profileData: profile
-            });
-        } else {
-            // New user - default state
-            this.set('user', {
-                id: 1,
-                name: 'DrawHub Student',
-                email: 'student@drawhub.com',
+                id: null,
+                name: 'Guest',
+                email: null,
                 level: 1,
                 xp: 0,
                 avatar: null,
-                joinedDate: new Date().toISOString().split('T')[0]
+                joinedDate: new Date().toISOString().split('T')[0],
+                profileData: null
+            });
+            return;
+        }
+
+        try {
+            // Load profile from API
+            const profile = await window.authService.getUserProfile();
+
+            if (profile) {
+                // User has profile
+                this.set('user', {
+                    id: profile.id,
+                    name: profile.name,
+                    email: 'user@drawhub.com',
+                    level: profile.level || 1,
+                    xp: profile.xp || 0,
+                    avatar: profile.profilePicture || null,
+                    joinedDate: profile.createdAt ? profile.createdAt.split('T')[0] : new Date().toISOString().split('T')[0],
+                    profileData: profile
+                });
+            } else {
+                // Logged in but no profile
+                this.set('user', {
+                    id: null,
+                    name: 'User',
+                    email: 'user@drawhub.com',
+                    level: 1,
+                    xp: 0,
+                    avatar: null,
+                    joinedDate: new Date().toISOString().split('T')[0],
+                    profileData: null
+                });
+            }
+        } catch (error) {
+            console.error('Failed to load profile:', error);
+            this.set('user', {
+                id: null,
+                name: 'User',
+                email: null,
+                level: 1,
+                xp: 0,
+                avatar: null,
+                joinedDate: new Date().toISOString().split('T')[0],
+                profileData: null
             });
         }
     }
