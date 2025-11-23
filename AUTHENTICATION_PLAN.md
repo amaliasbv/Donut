@@ -1205,6 +1205,219 @@ Sugestie: **Modular, pas cu pas**
 
 ---
 
+## 🔗 INTEGRARE CU ONBOARDING EXISTENT
+
+### Situația Actuală (v2.1)
+
+**Onboarding implementat deja:**
+- ✅ Multi-step form (3 pași) - **Documentat în [ONBOARDING_IMPLEMENTATION.md](ONBOARDING_IMPLEMENTATION.md)**
+- ✅ Colectare date: name, age, gender, experience, goals, style, learning mode, profile picture
+- ✅ Salvare în localStorage
+- ✅ Sistem de recomandări personalizate
+- ✅ 578 linii de cod funcțional
+
+**Ce trebuie modificat pentru integrare cu Auth:**
+
+#### 1. Onboarding Page - Minor Updates
+```javascript
+// src/js/pages/onboarding.js - Modificare în completeOnboarding()
+
+completeOnboarding() {
+    this.profileData.completedOnboarding = true;
+    this.profileData.createdAt = new Date().toISOString();
+
+    // OLD: Save doar în localStorage
+    // localStorage.setItem('userProfile', JSON.stringify(this.profileData));
+
+    // NEW: Save în backend via API
+    const authService = window.authService;
+    authService.saveUserProfile(this.profileData)
+        .then(() => {
+            this.showSuccess();
+            setTimeout(() => {
+                window.appRouter.navigate('home');
+            }, 2000);
+        })
+        .catch(error => {
+            this.showError('Failed to save profile: ' + error.message);
+        });
+}
+```
+
+#### 2. AuthService - Add Profile Endpoints
+```javascript
+// src/js/services/authService.js - ADD
+
+// Save user profile (after onboarding)
+async saveUserProfile(profileData) {
+  try {
+    const response = await this.authenticatedFetch(
+      `${this.apiUrl}/profile`,
+      {
+        method: 'POST',
+        body: JSON.stringify(profileData)
+      }
+    );
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to save profile');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Save profile error:', error);
+    throw error;
+  }
+}
+
+// Get user profile
+async getUserProfile() {
+  try {
+    const response = await this.authenticatedFetch(
+      `${this.apiUrl}/profile`,
+      { method: 'GET' }
+    );
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to get profile');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Get profile error:', error);
+    throw error;
+  }
+}
+```
+
+#### 3. Backend - Profile Endpoints
+```javascript
+// backend/controllers/profileController.js - NEW FILE
+
+import { UserProfile } from '../models/index.js';
+
+// Save/Update User Profile
+export const saveProfile = async (req, res) => {
+  try {
+    const userId = req.user.id; // From JWT passport middleware
+    const profileData = req.body;
+
+    // Check if profile exists
+    let profile = await UserProfile.findOne({ where: { userId } });
+
+    if (profile) {
+      // Update existing profile
+      await profile.update(profileData);
+    } else {
+      // Create new profile
+      profile = await UserProfile.create({
+        userId,
+        ...profileData
+      });
+    }
+
+    res.json({
+      message: 'Profile saved successfully',
+      profile
+    });
+
+  } catch (error) {
+    console.error('Save profile error:', error);
+    res.status(500).json({ error: 'Failed to save profile' });
+  }
+};
+
+// Get User Profile
+export const getProfile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const profile = await UserProfile.findOne({ where: { userId } });
+
+    if (!profile) {
+      return res.status(404).json({ error: 'Profile not found' });
+    }
+
+    res.json({ profile });
+
+  } catch (error) {
+    console.error('Get profile error:', error);
+    res.status(500).json({ error: 'Failed to get profile' });
+  }
+};
+```
+
+#### 4. Flow Complet Integrat
+
+**Noul Flow (cu Authentication):**
+```
+1. Vizită website → Landing page public (fără autentificare)
+   ↓
+2. Click "Sign Up" → Email + Password
+   ↓
+3. Email verification → Click link din email
+   ↓
+4. First Login → Check: has profile? NO → Redirect la ONBOARDING
+   ↓
+5. Complete Onboarding (3 steps) → Save în DATABASE via API
+   ↓
+6. Redirect la Home → Experiență personalizată
+   ↓
+7. Next Logins → Load profile din database → Skip onboarding
+```
+
+**State Management Update:**
+```javascript
+// src/js/utils/state.js - UPDATE initializeUser()
+
+async initializeUser() {
+  const authService = window.authService;
+
+  if (authService.isAuthenticated()) {
+    try {
+      // Load profile from backend
+      const { profile } = await authService.getUserProfile();
+
+      if (profile && profile.onboardingCompleted) {
+        // User has completed profile
+        this.set('user', {
+          id: profile.userId,
+          name: profile.name,
+          email: profile.email, // From JWT or separate call
+          level: 1,
+          xp: 0,
+          avatar: profile.profilePicture || null,
+          joinedDate: profile.createdAt,
+          profileData: profile
+        });
+      } else {
+        // User logged in but no profile → needs onboarding
+        this.set('user', {
+          id: profile.userId,
+          name: 'New User',
+          email: '', // From JWT
+          level: 1,
+          xp: 0,
+          avatar: null,
+          joinedDate: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Failed to load profile:', error);
+      // Fallback to defaults
+      this.setDefaultUser();
+    }
+  } else {
+    // Not authenticated
+    this.setDefaultUser();
+  }
+}
+```
+
+---
+
 ## ✅ CONCLUZIE
 
 Acest plan oferă o **arhitectură completă și modulară** pentru sistemul de autentificare DrawHub, urmând best practices din 2025 pentru platforme educaționale.
@@ -1215,8 +1428,41 @@ Acest plan oferă o **arhitectură completă și modulară** pentru sistemul de 
 - ✅ Scalabil (backend separat, database relațională)
 - ✅ Gratuit pentru început (Render + PostgreSQL free tier)
 - ✅ Modular (poate fi implementat step-by-step)
+- ✅ **Integrare perfectă cu onboarding existent** (578 linii deja scrise)
+
+**Onboarding Implementation:**
+- Detalii complete în: **[ONBOARDING_IMPLEMENTATION.md](ONBOARDING_IMPLEMENTATION.md)**
+- 578 linii cod deja funcțional
+- Necesită doar update minor pentru backend integration
 
 **Întrebare pentru tine:** Vrei să încep cu implementarea? Cu ce modul să încep?
+
+---
+
+## 📚 DOCUMENTAȚIE LEGATĂ
+
+### Implementări Existente:
+- **[ONBOARDING_IMPLEMENTATION.md](ONBOARDING_IMPLEMENTATION.md)** - Sistem onboarding complet (v2.1)
+  - Multi-step form (3 pași)
+  - Profile storage (localStorage)
+  - Recommendation system
+  - 578 linii cod + 450 linii CSS
+
+- **[SUMAR_IMPLEMENTARE.md](SUMAR_IMPLEMENTARE.md)** - Implementare Color Theory Lesson
+  - Prima lecție interactivă
+  - TTS narration
+  - Quiz & certificate
+
+- **[RAPORT_TRADUCERE_EN.md](RAPORT_TRADUCERE_EN.md)** - Traducere completă în engleză
+  - 1,000+ strings traduse
+  - TTS fix (ro-RO → en-US)
+
+### Planuri Viitoare:
+- **[AUTHENTICATION_PLAN.md](AUTHENTICATION_PLAN.md)** - Acest document
+  - Full authentication system
+  - Backend architecture
+  - Database schema
+  - Integration cu onboarding existent
 
 ---
 
