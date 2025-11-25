@@ -7,13 +7,25 @@ export default class HomePage {
     }
 
     async render() {
-        const user = this.state.get('user');
-        const progress = this.state.get('progress');
+        const user = this.state.get('user') || { name: 'User', level: 1, xp: 0 };
+        const progress = this.state.get('progress') || {
+            lessonsCompleted: 0,
+            totalLessons: 10,
+            assignmentsCompleted: 0,
+            totalAssignments: 5,
+            skills: {
+                color: 0,
+                shading: 0,
+                perspective: 0,
+                composition: 0,
+                anatomy: 0
+            }
+        };
 
         return `
             <div class="page-container">
                 <header class="text-center mb-4">
-                    <h1 style="color: var(--primary); font-size: 2.5rem;">🎨 Welcome to DrawHub, ${user.name}!</h1>
+                    <h1 style="color: var(--primary); font-size: 2.5rem;">Welcome to DrawHub, ${user.name || 'User'}!</h1>
                     <p style="font-size: 1.2rem; color: var(--text-gray);">
                         AI-Powered Art Learning Platform
                     </p>
@@ -23,20 +35,20 @@ export default class HomePage {
                 <div class="grid grid-4 mb-4">
                     <div class="card text-center">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
-                        <h3 style="font-size: 2rem; color: var(--primary);">${progress.lessonsCompleted}/${progress.totalLessons}</h3>
+                        <h3 style="font-size: 2rem; color: var(--primary);">${progress.lessonsCompleted || 0}/${progress.totalLessons || 10}</h3>
                         <p style="color: var(--text-gray);">Lessons Completed</p>
                     </div>
 
                     <div class="card text-center">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
-                        <h3 style="font-size: 2rem; color: var(--secondary-dark);">${progress.assignmentsCompleted}/${progress.totalAssignments}</h3>
+                        <h3 style="font-size: 2rem; color: var(--secondary-dark);">${progress.assignmentsCompleted || 0}/${progress.totalAssignments || 5}</h3>
                         <p style="color: var(--text-gray);">Assignments Completed</p>
                     </div>
 
                     <div class="card text-center">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
-                        <h3 style="font-size: 2rem; color: var(--warning);">Level ${user.level}</h3>
-                        <p style="color: var(--text-gray);">${user.xp} XP</p>
+                        <h3 style="font-size: 2rem; color: var(--warning);">Level ${user.level || 1}</h3>
+                        <p style="color: var(--text-gray);">${user.xp || 0} XP</p>
                     </div>
 
                     <div class="card text-center">
@@ -125,7 +137,17 @@ export default class HomePage {
     }
 
     renderSkillBars(skills) {
-        return Object.entries(skills).map(([skill, value]) => `
+        // Default skills if not provided
+        const defaultSkills = {
+            color: 0,
+            shading: 0,
+            perspective: 0,
+            composition: 0,
+            anatomy: 0
+        };
+        const safeSkills = skills || defaultSkills;
+
+        return Object.entries(safeSkills).map(([skill, value]) => `
             <div class="skill-bar mb-3">
                 <div class="flex-between mb-1">
                     <span style="font-weight: 600; text-transform: capitalize;">${this.translateSkill(skill)}</span>
