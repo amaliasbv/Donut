@@ -7,10 +7,34 @@ export default class ProfilePage {
     }
 
     async render() {
-        const user = this.state.get('user');
-        const progress = this.state.get('progress');
-        const badges = this.state.get('badges');
-        const profile = user.profileData; // User profile from onboarding
+        const user = this.state.get('user') || {
+            name: 'User',
+            email: 'user@drawhub.com',
+            level: 1,
+            xp: 0,
+            avatar: '👤',
+            joinedDate: new Date().toISOString(),
+            profileData: null
+        };
+        const progress = this.state.get('progress') || {
+            lessonsCompleted: 0,
+            totalLessons: 10,
+            assignmentsCompleted: 0,
+            totalAssignments: 5,
+            skills: {
+                color: 0,
+                shading: 0,
+                perspective: 0,
+                composition: 0,
+                anatomy: 0
+            }
+        };
+        const badges = this.state.get('badges') || [
+            { id: 1, name: 'First Steps', icon: '🎨', earned: false },
+            { id: 2, name: 'Color Master', icon: '🌈', earned: false },
+            { id: 3, name: 'Dedicated', icon: '⭐', earned: false }
+        ];
+        const profile = user.profileData || null; // User profile from onboarding
 
         return `
             <div class="page-container">
@@ -145,7 +169,16 @@ export default class ProfilePage {
     }
 
     renderSkills(skills) {
-        return Object.entries(skills).map(([skill, value]) => `
+        const defaultSkills = {
+            color: 0,
+            shading: 0,
+            perspective: 0,
+            composition: 0,
+            anatomy: 0
+        };
+        const safeSkills = skills || defaultSkills;
+
+        return Object.entries(safeSkills).map(([skill, value]) => `
             <div style="margin-bottom: 1.5rem;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                     <span style="font-weight: 600; text-transform: capitalize;">${this.translateSkill(skill)}</span>
