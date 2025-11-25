@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { User, UserProfile, RefreshToken } from '../models/index.js';
 import {
   generateAccessToken,
@@ -9,6 +10,15 @@ import {
   getValidRefreshToken
 } from '../utils/tokenUtils.js';
 import { sendVerificationEmail, sendPasswordResetEmail } from '../utils/emailService.js';
+
+/**
+ * Constant-time string comparison to prevent timing attacks
+ */
+const safeCompare = (a, b) => {
+  if (!a || !b) return false;
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b));
+};
 
 /**
  * @route   POST /api/auth/signup
@@ -49,26 +59,36 @@ export const signup = async (req, res) => {
     const verificationTokenExpires = new Date();
     verificationTokenExpires.setHours(verificationTokenExpires.getHours() + 24); // 24 hours
 
+    // In development mode without email configured, auto-verify users
+    const isEmailConfigured = process.env.EMAIL_USER && process.env.EMAIL_PASSWORD;
+    const autoVerify = process.env.NODE_ENV === 'development' && !isEmailConfigured;
+
     // Create user
     const user = await User.create({
       email,
       password, // Will be hashed by model hook
-      isVerified: false,
-      verificationToken,
-      verificationTokenExpires
+      isVerified: autoVerify, // Auto-verify in dev mode without email
+      verificationToken: autoVerify ? null : verificationToken,
+      verificationTokenExpires: autoVerify ? null : verificationTokenExpires
     });
 
-    // Send verification email
-    try {
-      await sendVerificationEmail(email, verificationToken);
-    } catch (emailError) {
-      console.error('Failed to send verification email:', emailError.message);
-      // Don't fail signup if email fails
+    // Send verification email (only if email is configured)
+    if (!autoVerify) {
+      try {
+        await sendVerificationEmail(email, verificationToken);
+      } catch (emailError) {
+        console.error('Failed to send verification email:', emailError.message);
+        // Don't fail signup if email fails
+      }
+    } else {
+      console.log(`✅ Auto-verified user in development mode: ${email}`);
     }
 
     res.status(201).json({
       success: true,
-      message: 'Account created successfully! Please check your email to verify your account.',
+      message: autoVerify
+        ? 'Account created and verified successfully! You can now log in.'
+        : 'Account created successfully! Please check your email to verify your account.',
       user: {
         id: user.id,
         email: user.email,
@@ -200,10 +220,23 @@ export const verifyEmail = async (req, res) => {
       });
     }
 
-    // Find user with this token
-    const user = await User.findOne({
-      where: { verificationToken: token }
+    // Find all unverified users with tokens (prevents timing attack)
+    // We do a constant-time comparison after fetching
+    const usersWithTokens = await User.findAll({
+      where: {
+        isVerified: false,
+        verificationToken: { [require('sequelize').Op.ne]: null }
+      }
     });
+
+    // Find matching user with constant-time comparison
+    let user = null;
+    for (const u of usersWithTokens) {
+      if (u.verificationToken && safeCompare(token, u.verificationToken)) {
+        user = u;
+        break;
+      }
+    }
 
     if (!user) {
       return res.status(404).json({
@@ -459,10 +492,21 @@ export const resetPassword = async (req, res) => {
       });
     }
 
-    // Find user with this token
-    const user = await User.findOne({
-      where: { resetPasswordToken: token }
+    // Find all users with reset tokens (prevents timing attack)
+    const usersWithResetTokens = await User.findAll({
+      where: {
+        resetPasswordToken: { [require('sequelize').Op.ne]: null }
+      }
     });
+
+    // Find matching user with constant-time comparison
+    let user = null;
+    for (const u of usersWithResetTokens) {
+      if (u.resetPasswordToken && safeCompare(token, u.resetPasswordToken)) {
+        user = u;
+        break;
+      }
+    }
 
     if (!user) {
       return res.status(404).json({

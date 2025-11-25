@@ -1,5 +1,5 @@
 import express from 'express';
-import { body } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 import {
   signup,
   login,
@@ -13,6 +13,19 @@ import {
 
 const router = express.Router();
 
+// Validation error handling middleware
+const validateRequest = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: 'Validation Error',
+      message: errors.array()[0].msg,
+      details: errors.array()
+    });
+  }
+  next();
+};
+
 /**
  * @route   POST /api/auth/signup
  * @desc    Register new user
@@ -23,6 +36,7 @@ router.post('/signup',
     body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
     body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
   ],
+  validateRequest,
   signup
 );
 
@@ -36,6 +50,7 @@ router.post('/login',
     body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
     body('password').notEmpty().withMessage('Password is required')
   ],
+  validateRequest,
   login
 );
 
@@ -55,6 +70,7 @@ router.post('/refresh',
   [
     body('refreshToken').notEmpty().withMessage('Refresh token is required')
   ],
+  validateRequest,
   refreshAccessToken
 );
 
@@ -67,6 +83,7 @@ router.post('/logout',
   [
     body('refreshToken').notEmpty().withMessage('Refresh token is required')
   ],
+  validateRequest,
   logout
 );
 
@@ -79,6 +96,7 @@ router.post('/resend-verification',
   [
     body('email').isEmail().normalizeEmail().withMessage('Valid email is required')
   ],
+  validateRequest,
   resendVerification
 );
 
@@ -91,6 +109,7 @@ router.post('/forgot-password',
   [
     body('email').isEmail().normalizeEmail().withMessage('Valid email is required')
   ],
+  validateRequest,
   forgotPassword
 );
 
@@ -104,6 +123,7 @@ router.post('/reset-password',
     body('token').notEmpty().withMessage('Reset token is required'),
     body('newPassword').isLength({ min: 8 }).withMessage('Password must be at least 8 characters')
   ],
+  validateRequest,
   resetPassword
 );
 

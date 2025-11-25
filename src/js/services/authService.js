@@ -7,11 +7,17 @@
 
 class AuthService {
   constructor() {
-    this.API_BASE_URL = 'http://localhost:3000/api';
+    // Use environment-based API URL (configurable)
+    this.API_BASE_URL = window.API_BASE_URL ||
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000/api'
+        : '/api'); // Production: same origin
     this.accessToken = localStorage.getItem('accessToken');
     this.refreshToken = localStorage.getItem('refreshToken');
     this.isRefreshing = false;
     this.refreshSubscribers = [];
+    this.refreshTimeout = null;
+    this.MAX_REFRESH_WAIT = 10000; // 10 second timeout for refresh
   }
 
   // ==================== TOKEN MANAGEMENT ====================
@@ -127,16 +133,34 @@ class AuthService {
 
       // If unauthorized, try refreshing token
       if (response.status === 401) {
-        const data = await response.json();
+        let data;
+        try {
+          data = await response.json();
+        } catch {
+          data = { needsLogin: true };
+        }
 
         // If token expired, refresh and retry
-        if (data.needsLogin && this.refreshToken) {
-          // If already refreshing, wait for it
+        if (this.refreshToken) {
+          // If already refreshing, wait for it with timeout
           if (this.isRefreshing) {
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
+              // Add timeout to prevent infinite wait
+              const timeout = setTimeout(() => {
+                this.isRefreshing = false;
+                this.refreshSubscribers = [];
+                this.clearTokens();
+                reject(new Error('Session expired. Please log in again.'));
+              }, this.MAX_REFRESH_WAIT);
+
               this.subscribeTokenRefresh((newToken) => {
-                headers['Authorization'] = `Bearer ${newToken}`;
-                resolve(fetch(url, { ...options, headers }));
+                clearTimeout(timeout);
+                if (newToken) {
+                  headers['Authorization'] = `Bearer ${newToken}`;
+                  resolve(fetch(url, { ...options, headers }));
+                } else {
+                  reject(new Error('Session expired. Please log in again.'));
+                }
               });
             });
           }
@@ -154,13 +178,22 @@ class AuthService {
             response = await fetch(url, { ...options, headers });
           } catch (refreshError) {
             this.isRefreshing = false;
+            this.onTokenRefreshed(null); // Notify subscribers of failure
+            this.clearTokens();
             throw new Error('Session expired. Please log in again.');
           }
+        } else {
+          this.clearTokens();
+          throw new Error('Session expired. Please log in again.');
         }
       }
 
       return response;
     } catch (error) {
+      // Handle network errors gracefully
+      if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        throw new Error('Unable to connect to server. Please check your connection.');
+      }
       throw error;
     }
   }
@@ -377,7 +410,11 @@ class AuthService {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to save profile');
+        // Create error with status code for proper handling
+        const error = new Error(data.message || 'Failed to save profile');
+        error.status = response.status;
+        error.data = data;
+        throw error;
       }
 
       return data.profile;

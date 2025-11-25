@@ -100,6 +100,20 @@ export const createProfile = async (req, res) => {
       });
     }
 
+    // Sanitize profilePicture - must be string or null (not object/array)
+    // Also validate size (max ~750KB base64 = ~1MB limit)
+    const MAX_PROFILE_PICTURE_SIZE = 1000000; // 1MB in characters
+    let sanitizedProfilePicture = null;
+    if (profilePicture && typeof profilePicture === 'string' && profilePicture.trim().length > 0) {
+      if (profilePicture.length > MAX_PROFILE_PICTURE_SIZE) {
+        return res.status(400).json({
+          error: 'Validation Error',
+          message: 'Profile picture is too large. Maximum size is 750KB.'
+        });
+      }
+      sanitizedProfilePicture = profilePicture;
+    }
+
     // Create profile
     const profile = await UserProfile.create({
       userId,
@@ -109,7 +123,7 @@ export const createProfile = async (req, res) => {
       experienceLevel,
       drawingDuration,
       learningGoals: learningGoals || [],
-      profilePicture: profilePicture || null,
+      profilePicture: sanitizedProfilePicture,
       preferredStyle,
       learningReason,
       learningMode,
@@ -196,7 +210,22 @@ export const updateProfile = async (req, res) => {
     if (experienceLevel !== undefined) profile.experienceLevel = experienceLevel;
     if (drawingDuration !== undefined) profile.drawingDuration = drawingDuration;
     if (learningGoals !== undefined) profile.learningGoals = learningGoals;
-    if (profilePicture !== undefined) profile.profilePicture = profilePicture;
+    if (profilePicture !== undefined) {
+      // Sanitize profilePicture - must be string or null
+      // Also validate size (max ~750KB base64 = ~1MB limit)
+      const MAX_PROFILE_PICTURE_SIZE = 1000000;
+      if (profilePicture && typeof profilePicture === 'string' && profilePicture.trim().length > 0) {
+        if (profilePicture.length > MAX_PROFILE_PICTURE_SIZE) {
+          return res.status(400).json({
+            error: 'Validation Error',
+            message: 'Profile picture is too large. Maximum size is 750KB.'
+          });
+        }
+        profile.profilePicture = profilePicture;
+      } else {
+        profile.profilePicture = null;
+      }
+    }
     if (preferredStyle !== undefined) profile.preferredStyle = preferredStyle;
     if (learningReason !== undefined) profile.learningReason = learningReason;
     if (learningMode !== undefined) profile.learningMode = learningMode;

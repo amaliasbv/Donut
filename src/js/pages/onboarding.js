@@ -449,6 +449,10 @@ class OnboardingPage {
             if (key === 'learningGoals') {
                 // Collect all checked goals
                 this.profileData.learningGoals = formData.getAll('learningGoals');
+            } else if (key === 'profilePicture') {
+                // Skip profilePicture - it's handled separately by handlePictureUpload
+                // Only update if it's not already set (keep null if no file uploaded)
+                continue;
             } else {
                 this.profileData[key] = value;
             }
@@ -490,27 +494,99 @@ class OnboardingPage {
 
             console.log('Profile saved:', savedProfile);
 
-            // Update app state
-            const state = window.appState;
-            state.set('user', {
-                ...state.get('user'),
-                name: savedProfile.name,
-                level: savedProfile.level,
-                xp: savedProfile.xp,
-                avatar: savedProfile.profilePicture,
-                profileData: savedProfile
-            });
+            // Update app state safely
+            try {
+                const state = window.appState;
+                if (state) {
+                    const currentUser = state.get('user') || {};
+                    state.set('user', {
+                        ...currentUser,
+                        name: savedProfile.name,
+                        level: savedProfile.level,
+                        xp: savedProfile.xp,
+                        avatar: savedProfile.profilePicture,
+                        profileData: savedProfile
+                    });
+                }
+            } catch (stateError) {
+                console.warn('Could not update app state:', stateError);
+            }
+
+            // Update navbar to show user name
+            if (window.updateNavbar) {
+                window.updateNavbar();
+            }
 
             // Show success message
             this.showSuccess('Profile created successfully! Redirecting...');
 
             // Redirect to home after 2 seconds
             setTimeout(() => {
-                window.appRouter.navigate('home');
+                try {
+                    if (window.updateNavbarVisibility) {
+                        window.updateNavbarVisibility('home');
+                    }
+                    window.location.hash = 'home';
+                    if (window.appRouter) {
+                        window.appRouter.navigate('home');
+                    }
+                } catch (navError) {
+                    console.warn('Navigation error:', navError);
+                    // Fallback - just reload to home
+                    window.location.href = window.location.pathname + '#home';
+                }
             }, 2000);
 
         } catch (error) {
             console.error('Failed to save profile:', error);
+
+            // Handle 409 Conflict - profile already exists
+            if (error.status === 409) {
+                // Profile already exists - load it and redirect to home
+                console.log('Profile already exists, loading existing profile...');
+                try {
+                    const existingProfile = await window.authService.getUserProfile();
+                    if (existingProfile) {
+                        // Update state with existing profile
+                        try {
+                            const state = window.appState;
+                            if (state) {
+                                const currentUser = state.get('user') || {};
+                                state.set('user', {
+                                    ...currentUser,
+                                    name: existingProfile.name,
+                                    level: existingProfile.level,
+                                    xp: existingProfile.xp,
+                                    avatar: existingProfile.profilePicture,
+                                    profileData: existingProfile
+                                });
+                            }
+                        } catch (stateError) {
+                            console.warn('Could not update app state:', stateError);
+                        }
+
+                        if (window.updateNavbar) {
+                            window.updateNavbar();
+                        }
+
+                        this.showSuccess('Profile already exists! Redirecting...');
+
+                        setTimeout(() => {
+                            if (window.updateNavbarVisibility) {
+                                window.updateNavbarVisibility('home');
+                            }
+                            window.location.hash = 'home';
+                            if (window.appRouter) {
+                                window.appRouter.navigate('home');
+                            }
+                        }, 1500);
+                        return;
+                    }
+                } catch (profileError) {
+                    console.error('Could not load existing profile:', profileError);
+                }
+            }
+
             this.showError('Failed to save profile: ' + error.message);
 
             // Re-enable submit button

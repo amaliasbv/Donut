@@ -11,6 +11,16 @@ const jwtOptions = {
 
 passport.use('jwt', new JwtStrategy(jwtOptions, async (payload, done) => {
   try {
+    // Validate payload structure
+    if (!payload || !payload.userId) {
+      return done(null, false, { message: 'Invalid token payload' });
+    }
+
+    // Check token type (should be access token)
+    if (payload.type && payload.type !== 'access') {
+      return done(null, false, { message: 'Invalid token type' });
+    }
+
     // Find user by ID from JWT payload
     const user = await User.findByPk(payload.userId);
 
@@ -26,7 +36,8 @@ passport.use('jwt', new JwtStrategy(jwtOptions, async (payload, done) => {
     // Attach user to request
     return done(null, user);
   } catch (error) {
-    return done(error, false);
+    console.error('JWT Strategy error:', error.message);
+    return done(null, false, { message: 'Token verification failed' });
   }
 }));
 
