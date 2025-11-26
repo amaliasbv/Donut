@@ -26,6 +26,18 @@ RefreshToken.belongsTo(User, {
   as: 'user'
 });
 
+// Test database connection
+export const testConnection = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('✅ Database connection established successfully');
+    return true;
+  } catch (error) {
+    console.error('❌ Database connection failed:', error.message);
+    return false;
+  }
+};
+
 // Sync database (create tables if they don't exist)
 export const syncDatabase = async (options = {}) => {
   try {
@@ -63,5 +75,6 @@ export default {
   User,
   UserProfile,
   RefreshToken,
+  testConnection,
   syncDatabase
 };

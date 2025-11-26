@@ -168,7 +168,15 @@ export default class SignupPage {
         // Login link
         const loginLink = document.getElementById('loginLink');
         loginLink.addEventListener('click', () => {
+            // Update navbar visibility
+            if (window.updateNavbarVisibility) {
+                window.updateNavbarVisibility('login');
+            }
+            // Navigate to login
             window.location.hash = 'login';
+            if (window.appRouter) {
+                window.appRouter.navigate('login');
+            }
         });
     }
 
@@ -246,21 +254,71 @@ export default class SignupPage {
 
             console.log('Signup successful:', result);
 
-            // Show success message
-            this.showSuccess(
-                '✅ Account created successfully! ' +
-                'Please check your email inbox for a verification link. ' +
-                'You\'ll need to verify your email before logging in.'
-            );
+            // Check if user is auto-verified (dev mode)
+            if (result.user && result.user.isVerified) {
+                // ✅ AUTO-VERIFIED in dev mode - AUTO LOGIN!
+                this.showSuccess('✅ Account created! Setting up your profile...');
 
-            // Clear form
-            document.getElementById('signupForm').reset();
-            document.getElementById('passwordStrength').style.display = 'none';
+                // Auto-login with the same credentials
+                try {
+                    const loginResult = await this.authService.login(email, password);
 
-            // Redirect to login after 5 seconds
-            setTimeout(() => {
-                window.location.hash = 'login';
-            }, 5000);
+                    // Update app state
+                    this.state.set('user', {
+                        id: loginResult.user.id,
+                        email: loginResult.user.email,
+                        name: 'User',
+                        profileData: null
+                    });
+
+                    // Update navbar
+                    if (window.updateNavbar) {
+                        window.updateNavbar();
+                    }
+
+                    // Redirect to onboarding (skip login page!)
+                    setTimeout(() => {
+                        if (window.updateNavbarVisibility) {
+                            window.updateNavbarVisibility('onboarding');
+                        }
+                        window.location.hash = 'onboarding';
+                        if (window.appRouter) {
+                            window.appRouter.navigate('onboarding');
+                        }
+                    }, 1500);
+
+                } catch (loginError) {
+                    console.error('Auto-login failed:', loginError);
+                    // Fallback: redirect to login
+                    this.showSuccess('Account created! Redirecting to login...');
+                    setTimeout(() => {
+                        window.location.hash = 'login';
+                        if (window.appRouter) {
+                            window.appRouter.navigate('login');
+                        }
+                    }, 2000);
+                }
+
+            } else {
+                // Production mode - needs email verification
+                this.showSuccess(
+                    '✅ Account created successfully! ' +
+                    'Please check your email inbox for a verification link. ' +
+                    'You\'ll need to verify your email before logging in.'
+                );
+
+                // Clear form
+                document.getElementById('signupForm').reset();
+                document.getElementById('passwordStrength').style.display = 'none';
+
+                // Redirect to login after 5 seconds
+                setTimeout(() => {
+                    window.location.hash = 'login';
+                    if (window.appRouter) {
+                        window.appRouter.navigate('login');
+                    }
+                }, 5000);
+            }
 
         } catch (error) {
             console.error('Signup error:', error);

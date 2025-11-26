@@ -33,6 +33,7 @@ export default class LoginPage {
                                 placeholder="your.email@example.com"
                                 required
                                 autocomplete="email"
+                                autofocus
                             />
                             <span class="error-message" id="emailError"></span>
                         </div>
@@ -122,7 +123,15 @@ export default class LoginPage {
         // Sign up link
         const signupLink = document.getElementById('signupLink');
         signupLink.addEventListener('click', () => {
+            // Update navbar visibility
+            if (window.updateNavbarVisibility) {
+                window.updateNavbarVisibility('signup');
+            }
+            // Navigate to signup
             window.location.hash = 'signup';
+            if (window.appRouter) {
+                window.appRouter.navigate('signup');
+            }
         });
 
         // Forgot password link
@@ -188,16 +197,33 @@ export default class LoginPage {
                 profileData: profile
             });
 
+            // Update navbar to show logged-in state
+            if (window.updateNavbar) {
+                window.updateNavbar();
+            }
+
             // Check if onboarding is needed
             if (result.needsOnboarding || !profile) {
                 // Redirect to onboarding
+                if (window.updateNavbarVisibility) {
+                    window.updateNavbarVisibility('onboarding');
+                }
                 setTimeout(() => {
                     window.location.hash = 'onboarding';
+                    if (window.appRouter) {
+                        window.appRouter.navigate('onboarding');
+                    }
                 }, 500);
             } else {
                 // Redirect to home
+                if (window.updateNavbarVisibility) {
+                    window.updateNavbarVisibility('home');
+                }
                 setTimeout(() => {
                     window.location.hash = 'home';
+                    if (window.appRouter) {
+                        window.appRouter.navigate('home');
+                    }
                 }, 500);
             }
 

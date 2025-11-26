@@ -73,11 +73,33 @@ const UserProfile = sequelize.define('UserProfile', {
     comment: 'How long user has been drawing (e.g., "less-than-1-month", "1-6-months", etc.)'
   },
   learningGoals: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: sequelize.getDialect() === 'postgres'
+      ? DataTypes.ARRAY(DataTypes.STRING)
+      : DataTypes.JSON,
     allowNull: true,
     defaultValue: [],
     field: 'learning_goals',
-    comment: 'Array of learning goals: portrait, anime, digital-art, perspective, coloring, anatomy, animals, character-design'
+    comment: 'Array of learning goals: portrait, anime, digital-art, perspective, coloring, anatomy, animals, character-design',
+    get() {
+      const value = this.getDataValue('learningGoals');
+      // Ensure we always return an array
+      if (!value) return [];
+      if (Array.isArray(value)) return value;
+      // For SQLite JSON storage
+      if (typeof value === 'string') {
+        try {
+          return JSON.parse(value);
+        } catch {
+          return [];
+        }
+      }
+      return [];
+    },
+    set(value) {
+      // Ensure we always store an array (or JSON string for SQLite)
+      const goals = Array.isArray(value) ? value : [];
+      this.setDataValue('learningGoals', goals);
+    }
   },
   profilePicture: {
     type: DataTypes.TEXT,
