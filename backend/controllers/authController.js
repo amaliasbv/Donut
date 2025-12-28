@@ -59,9 +59,10 @@ export const signup = async (req, res) => {
     const verificationTokenExpires = new Date();
     verificationTokenExpires.setHours(verificationTokenExpires.getHours() + 24); // 24 hours
 
-    // In development mode without email configured, auto-verify users
-    const isEmailConfigured = process.env.EMAIL_USER && process.env.EMAIL_PASSWORD;
-    const autoVerify = process.env.NODE_ENV === 'development' && !isEmailConfigured;
+    // Auto-verify users if SKIP_EMAIL_VERIFICATION is enabled
+    // This is useful when SMTP is blocked (e.g., on Render free tier)
+    const skipVerification = process.env.SKIP_EMAIL_VERIFICATION === 'true';
+    const autoVerify = skipVerification;
 
     // Create user
     const user = await User.create({
