@@ -15,6 +15,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust proxy for Render/Heroku/etc (required for rate limiting behind reverse proxy)
+// This allows express-rate-limit to correctly identify users by X-Forwarded-For header
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: false, // Allow frontend to load resources
