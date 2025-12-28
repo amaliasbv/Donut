@@ -40,15 +40,14 @@ class App {
         window.updateNavbar = this.updateNavbar.bind(this);
         window.updateNavbarVisibility = this.updateNavbarVisibility.bind(this);
 
+        // Public pages that don't require authentication
+        const publicPages = ['home', 'login', 'signup', 'verify-email'];
+        const currentHash = window.location.hash.slice(1) || 'home';
+
         // Check if user is authenticated
         if (!window.authService.isAuthenticated()) {
-            // Not logged in - show login page
-            const currentHash = window.location.hash.slice(1);
-
-            // Allow these pages without authentication
-            const publicPages = ['login', 'signup', 'verify-email'];
-
-            const targetPage = publicPages.includes(currentHash) ? currentHash : 'login';
+            // Not logged in - allow public pages, redirect others to home
+            const targetPage = publicPages.includes(currentHash) ? currentHash : 'home';
 
             this.updateNavbar();
             this.updateNavbarVisibility(targetPage);
@@ -97,11 +96,11 @@ class App {
             const page = window.location.hash.slice(1) || 'home';
 
             // Check authentication for protected pages
-            const publicPages = ['login', 'signup', 'verify-email'];
+            const publicPages = ['home', 'login', 'signup', 'verify-email'];
             const isPublic = publicPages.includes(page);
 
             if (!isPublic && !window.authService.isAuthenticated()) {
-                // Redirect to login if not authenticated
+                // Redirect to login if not authenticated (for protected pages)
                 window.location.hash = 'login';
                 this.updateNavbarVisibility('login');
                 this.router.navigate('login');
