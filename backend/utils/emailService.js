@@ -3,12 +3,17 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create reusable transporter
+// Create reusable transporter with explicit Gmail settings
 const transporter = nodemailer.createTransport({
-  service: process.env.EMAIL_SERVICE || 'gmail',
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // Use TLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS || process.env.EMAIL_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false // Allow self-signed certificates on some cloud platforms
   }
 });
 
