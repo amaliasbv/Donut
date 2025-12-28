@@ -8,10 +8,12 @@
 class AuthService {
   constructor() {
     // Use environment-based API URL (configurable)
+    // Production: Use separate backend service on Render
+    // Development: Use localhost:3000
     this.API_BASE_URL = window.API_BASE_URL ||
       (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:3000/api'
-        : '/api'); // Production: same origin
+        : 'https://drawhub-api.onrender.com/api'); // Production: Backend separat
     this.accessToken = localStorage.getItem('accessToken');
     this.refreshToken = localStorage.getItem('refreshToken');
     this.isRefreshing = false;
