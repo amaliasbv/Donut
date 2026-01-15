@@ -398,32 +398,29 @@ export default class HomePage {
                 });
             });
         } else {
-            // Landing page event handlers
-            const getStartedBtn = document.getElementById('getStartedBtn');
-            const loginHeroBtn = document.getElementById('loginHeroBtn');
-            const ctaSignupBtn = document.getElementById('ctaSignupBtn');
+            // Landing page event handlers - use event delegation for reliability
+            document.addEventListener('click', this.handleLandingClick);
+        }
+    }
 
-            if (getStartedBtn) {
-                getStartedBtn.addEventListener('click', () => {
-                    window.location.hash = 'signup';
-                });
-            }
+    handleLandingClick = (e) => {
+        const target = e.target;
 
-            if (loginHeroBtn) {
-                loginHeroBtn.addEventListener('click', () => {
-                    window.location.hash = 'login';
-                });
-            }
-
-            if (ctaSignupBtn) {
-                ctaSignupBtn.addEventListener('click', () => {
-                    window.location.hash = 'signup';
-                });
-            }
+        // Check if clicked element or its parent is one of our buttons
+        if (target.id === 'getStartedBtn' || target.closest('#getStartedBtn')) {
+            e.preventDefault();
+            window.location.hash = 'signup';
+        } else if (target.id === 'loginHeroBtn' || target.closest('#loginHeroBtn')) {
+            e.preventDefault();
+            window.location.hash = 'login';
+        } else if (target.id === 'ctaSignupBtn' || target.closest('#ctaSignupBtn')) {
+            e.preventDefault();
+            window.location.hash = 'signup';
         }
     }
 
     cleanup() {
-        // Cleanup if needed
+        // Remove event listener when navigating away
+        document.removeEventListener('click', this.handleLandingClick);
     }
 }
